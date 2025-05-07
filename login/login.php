@@ -1,7 +1,7 @@
 <?php
 if (!isset($_SESSION))
   session_start();
-  $connect = mysqli_connect('localhost','admin123','admin123','admin123') or die("Không thể kết nối đến database");
+  $connect = mysqli_connect('localhost','root','','admin123') or die("Không thể kết nối đến database");
 	mysqli_set_charset($connect,"utf8");
 //Xử lý đăng nhập
 if (isset($_POST['dangnhap'])) {

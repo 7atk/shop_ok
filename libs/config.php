@@ -3,9 +3,9 @@
 global $conn;
 
 $servername = "localhost";
-$username = "admin123";
-$password = "admin123";
-$dbname = "admin123";
+$username = "root";
+$password = "";
+$dbname = "game_store";
 
 /*
 $servername = "localhost";

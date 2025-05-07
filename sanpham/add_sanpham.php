@@ -24,29 +24,42 @@ if (!empty($_POST['ok'])) {
     }
 
     // Lấy dữ liệu từ POST
-    $idsp = trim($_POST['idsp'] ?? '');
+    // $idsp = trim($_POST['idsp'] ?? '');
+    $masp = trim($_POST['masp'] ?? '');
     $tensp = trim($_POST['tensp'] ?? '');
     $idloai = trim($_POST['idloai'] ?? '');
     $gia = trim($_POST['gianhap'] ?? '');
     $ttsp = trim($_POST['ttsp'] ?? '');
 
-    if (empty($idsp)) $errors['idsp'] = "<span style='color:red;'>Chưa nhập mã sản phẩm</span>";
+    if (empty($masp)) $errors['masp'] = "<span style='color:red;'>Chưa nhập mã sản phẩm</span>";
     if (empty($tensp)) $errors['tensp'] = "<span style='color:red;'>Chưa nhập tên sản phẩm</span>";
     if (empty($gia) || !is_numeric($gia)) $errors['gia'] = "<span style='color:red;'>Giá không hợp lệ</span>";
     if (empty($idloai)) $errors['idloai'] = "<span style='color:red;'>Chưa chọn loại sản phẩm</span>";
 
     if (!$errors) {
-        $sql_insert = "INSERT INTO san_pham (IDSP, IDLSP, TENSP, HINHSP, THONGTINSP, GIANHAP)
-                       VALUES ('$idsp', '$idloai', '$tensp', '$tenfile', '$ttsp', '$gia')";
-        $id = Execute($sql_insert); // Execute() phải là hàm bạn đã định nghĩa để thực thi câu SQL
+        // Kiểm tra mã sản phẩm đã tồn tại chưa
+        // $sql_check = "SELECT masp FROM sanpham WHERE masp = '$masp'";
+        // $result_check = SelectAll($sql_check); // SelectAll() phải là hàm bạn đã định nghĩa để lấy dữ liệu từ database
+        // if ($result_check > 0) {
+        //    echo "<script>alert('Mã sản phẩm đã tồn tại');</script>";
+        //    echo "<script>location.href='index.php?page=add_sanpham';</script>";
+        // }
+        // else {
+            $sql_insert = "INSERT INTO sanpham (masp, tensp, idlsp,mota, hinhanh, gia)
+            VALUES ('$masp','$tensp' ,'$idloai', '$ttsp','$tenfile' , '$gia')";
+             $id = Execute($sql_insert); // Execute() phải là hàm bạn đã định nghĩa để thực thi câu SQL
 
-        if ($id > 0) {
-            echo "<script>alert('Thêm thành công'); location.href='index.php?page=list_sanpham';</script>";
-        } else {
-            echo "<div class='text-danger'>Thêm sản phẩm không thành công</div>";
-        }
-    }
+             if ($id > 0) {
+              echo "<script>alert('Thêm thành công'); location.href='index.php?page=list_sanpham';</script>";
+               }  else {
+                    echo "<div class='text-danger'>Thêm sản phẩm không thành công</div>";
 }
+}
+        }
+
+    
+        
+
 ?>
 
 <div class="container">
@@ -56,13 +69,14 @@ if (!empty($_POST['ok'])) {
                 <tr>
                     <td>Mã sản phẩm:</td>
                     <td>
-                        <input name="idsp" type="text" class="form-control"
-                               value="<?= htmlspecialchars($idsp ?? '') ?>" />
+                        <input name="masp" type="text" class="form-control"
+                               value="<?= htmlspecialchars($masp ?? '') ?>" />
                         <?php if (!empty($errors['idsp'])): ?>
-                            <div class="text-danger"><?= $errors['idsp'] ?></div>
+                            <div class="text-danger"><?= $errors['masp'] ?></div>
                         <?php endif; ?>
                     </td>
                 </tr>
+                
 
                 <tr>
                     <td>Loại sản phẩm:</td>
@@ -70,12 +84,12 @@ if (!empty($_POST['ok'])) {
                         <select class="form-select btn-warning text-start" name="idloai">
                             <option value="" selected>Loại sản phẩm</option>
                             <?php
-                            $sql = "SELECT IDLSP, TENLOAI FROM LOAI_SP";
+                            $sql = "SELECT IDLSP, tenlsp FROM loai_sp";
                             $result = SelectAll($sql);
                             if (!empty($result)) {
                                 foreach ($result as $item) {
                                     $selected = (!empty($idloai) && $idloai == $item['IDLSP']) ? "selected" : "";
-                                    echo "<option value='{$item['IDLSP']}' $selected>{$item['TENLOAI']}</option>";
+                                    echo "<option value='{$item['IDLSP']}' $selected>{$item['tenlsp']}</option>";
                                 }
                             }
                             ?>

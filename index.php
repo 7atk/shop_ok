@@ -13,7 +13,7 @@ else
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Quản lý bán hàng Online</title>
+	<title>Games store team 19</title>
 	<!-- Bootstrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/menu.css" rel="stylesheet">
@@ -39,15 +39,15 @@ else
 							<div class="carousel-item active">
 								<img src="images/main-banner1-1440x550.jpg" height="200px" class="d-block w-100">
 								<div class="carousel-caption">
-									<h3>Máy tính xách tay chính hãng</h3>
-									<p>Chúng tôi hân hạnh đón tiếp khách hàng!</p>
+									<h3>One day gamer whole life gamers</h3>
+									<p>We have every fucking games you want You just search it </p>
 								</div>
 							</div>
 							<div class="carousel-item">
 								<img src="images/main-banner2-1440x550.jpg" height="200px" class="d-block w-100">
 								<div class="carousel-caption">
-								<h3>Máy tính chính hãng Accer</h3>
-									<p>Số 1 của việt nam!</p>
+								<h3>No.1 Game store on world</h3>
+									<p>Best Place for who is gamer</p>
 								</div>
 							</div>							
 						</div>
@@ -81,8 +81,8 @@ else
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownkm" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khuyến mãi </a>
 							<div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownkm">
-								<a class="dropdown-item" href="sony.php">Lễ tình nhân 14/2</a>
-								<a class="dropdown-item" href="samsung.php">Ngày phụ nữ VN 20/10</a>
+								<a class="dropdown-item" href="sony.php">Giáng Sinh</a>
+								<a class="dropdown-item" href="samsung.php">Lễ Độc Thân</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="sanpham.php">Tết âm lịch</a>
 								<a class="dropdown-item" href="vietnhat.php">Tết dương lịch</a>
@@ -90,13 +90,13 @@ else
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownkm" role="button" 
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loại sản phẩm</a>
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thể loại sản phẩm</a>
 							<div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownkm">
 								<?php include('libs/common.php');
-									$select="SELECT IDLSP,TENLOAI FROM LOAI_SP";
+									$select="SELECT IDLSP,tenlsp FROM LOAI_SP";
 									$list=SelectAll($select);
 									foreach ($list as $row) {
-										echo '<a class="dropdown-item" href="index.php?page=products&idlsp='.$row['IDLSP'].'">'.$row['TENLOAI'].'</a>';
+										echo '<a class="dropdown-item" href="index.php?page=products&idlsp='.$row['IDLSP'].'">'.$row['tenlsp'].'</a>';
 									}									
 								?>
 							</div>
