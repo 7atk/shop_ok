@@ -1,7 +1,7 @@
 <?php
 
 
-	$connect = mysqli_connect('localhost','admin123','admin123','admin123') or die("Không thể kết nối đến database");
+	$connect = mysqli_connect('localhost','root','','game_store') or die("Không thể kết nối đến database");
 	mysqli_set_charset($connect,"utf8");
 
 ?>
@@ -40,9 +40,10 @@
              echo "<script>alert('Mật khẩu không khớp. Vui lòng nhập lại.');</script>";
         } else {
           // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+          $roles = 2; // Giá trị mặc định cho vai trò người dùng
           $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
           // Thực hiện thêm người dùng mới vào cơ sở dữ liệu
-          $sql = "INSERT INTO users (USERNAME, PASSWORD, EMAIL) VALUES ('$user_name', '$hashed_password', '$email')";
+          $sql = "INSERT INTO users (USERNAME, PWD, EMAIL,roles) VALUES ('$user_name', '$hashed_password', '$email', '$roles')";
           if (mysqli_query($connect, $sql)) {
             echo "<script>alert('Đăng ký thành công!');</script>";
             // Chuyển hướng đến trang đăng nhập hoặc trang khác
@@ -61,7 +62,7 @@
   <form action="" method="post">
     <div class="mb-3 mt-3">
       <label for="Username">Username:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter email" name="user_name" required>
+      <input type="text" class="form-control" id="email" placeholder="Enter Username" name="user_name" required>
     </div>
     <div class="mb-3">
       <label for="pwd">Password:</label>

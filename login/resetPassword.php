@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $connect = mysqli_connect('localhost','root','','admin123') or die("Không thể kết nối đến database");
 mysqli_set_charset($connect,"utf8");
 if(isset($_POST['email'])) {

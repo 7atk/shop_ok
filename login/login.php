@@ -15,14 +15,14 @@ if (isset($_POST['dangnhap'])) {
   } else {
     // mã hóa pasword
     //$password = md5($password);
-    $sql = "SELECT USERNAME,PASSWORD FROM users WHERE USERNAME='$username'";
+    $sql = "SELECT USERNAME,PWD FROM users WHERE USERNAME='$username'";
     $lists = SelectAll($sql);
 
     if (count($lists) == 0) {
       $msg = "Tên đăng nhập này không tồn tại. Vui lòng kiểm tra lại.";
     } else {
       foreach ($lists as $item)
-        $mk = $item["PASSWORD"];
+        $mk = $item["PWD"];
       
       //So sánh 2 mật khẩu có trùng khớp hay không
       if (!password_verify($password, $mk)) {
@@ -30,6 +30,7 @@ if (isset($_POST['dangnhap'])) {
       } else {
         //Lưu tên đăng nhập
         $_SESSION['username'] = $username;
+        
         // echo "<script>window.alert('Login thành công');</script>";    
         // echo "Bạn vừa thêm: " .$id;           
         echo "<script>location.href='index.php';</script>";
