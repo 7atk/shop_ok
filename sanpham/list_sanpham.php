@@ -1,7 +1,13 @@
 <?php
+if(!isset($_SESSION['role'])&&$_SESSION['role']!=1){
+    echo "<script>alert('Bạn không có quyền truy cập trang này!');</script>";{
+        echo "<script>location.href='index.php';</script>"; 
+    exit;
+}}
+else{
 $sql = "SELECT id, masp, tensp, hinhanh, gia FROM sanpham";
 $lists = SelectAll($sql);
-$STT=0;
+$STT=0;}
 ?>
 
 <!-- HTML hiển thị -->

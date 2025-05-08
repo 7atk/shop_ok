@@ -1,6 +1,11 @@
 <?php
 if (!isset($_SESSION)) session_start();
-
+if(!isset($_SESSION['role'])&&$_SESSION['role']!=1){
+    echo "<script>alert('Bạn không có quyền truy cập trang này!');</script>";{
+        echo "<script>location.href='index.php';</script>"; 
+    exit;
+}}
+else{
 $errors = [];
 $tenfile = '';
 $data = [];
@@ -38,7 +43,7 @@ if (!empty($_POST['ok'])) {
 
     if (!$errors) {
         // Kiểm tra mã sản phẩm đã tồn tại chưa
-        // $sql_check = "SELECT masp FROM sanpham WHERE masp = '$masp'";
+        // $sql_check = "SELECT * FROM sanpham WHERE masp = '$masp'";
         // $result_check = SelectAll($sql_check); // SelectAll() phải là hàm bạn đã định nghĩa để lấy dữ liệu từ database
         // if ($result_check > 0) {
         //    echo "<script>alert('Mã sản phẩm đã tồn tại');</script>";
@@ -56,8 +61,8 @@ if (!empty($_POST['ok'])) {
 }
 }
         }
-
     
+     }  
         
 
 ?>

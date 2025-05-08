@@ -1,29 +1,35 @@
 <?php
 //include('libs/common.php'); //bên index.php đã khai báo rồi
-
-$sql = "SELECT IDSP, TENSP, GIANHAP, HINHSP, THONGTINSP FROM SAN_PHAM"; 
+if (isset($_GET['idlsp'])) { // Nếu có id loại sản phẩm
+    $idlsp = $_GET['idlsp']; // Chống SQL Injection
+    $sql = "SELECT 	masp	,tensp	,tenlsp,	mota,	hinhanh,	gia FROM SANPHAM s join loai_sp lsp on s.idlsp = lsp.idlsp WHERE s.idlsp = $idlsp"; // Lấy sản phẩm theo id loại sản phẩm
+    
+} else
+ {   
+$sql = "SELECT 	masp	,tensp	,tenlsp,	mota,	hinhanh,	gia FROM SANPHAM s join loai_sp lsp on s.idlsp = lsp.idlsp "; // Lấy tất cả sản phẩm
 
 if (isset($_GET['idsp'])) { 
-    $idsp = intval($_GET['idsp']); // Chống SQL Injection
-    $sql .= " WHERE IDSP = $idsp";
+    $idsp = $_GET['idsp']; // Chống SQL Injection
+    $sql .= " WHERE id = $idsp";}
 }
 
 $result = SelectAll($sql);
 disconnect_db();
 
 foreach ($result as $row) { 
-    $idsp = $row['IDSP'] ?? '';  
-    $tensp = htmlspecialchars($row['TENSP'] ?? 'Không có tên');  
-    $hinhsp = !empty($row['HINHSP']) ? "images/" . htmlspecialchars($row['HINHSP']) : "images/no-image.png";  
-    $thongtinsp = htmlspecialchars($row['THONGTINSP'] ?? 'Đang cập nhật thông tin sản phẩm');  
-    $price = is_numeric($row['GIANHAP']) ? $row['GIANHAP'] : 0;
+    $idsp = $row['masp'] ?? '';  
+    $tensp = htmlspecialchars($row['tensp'] ?? 'Không có tên');  
+    $hinhsp = !empty($row['hinhanh']) ? "images/" . htmlspecialchars($row['hinhanh']) : "images/no-image.png";  
+    $thongtinsp = htmlspecialchars($row['mota'] ?? 'Đang cập nhật thông tin sản phẩm');  
+    $tenlsp = htmlspecialchars($row['tenlsp'] ?? '');
+    $price = is_numeric($row['gia']) ? $row['gia'] : 0;
     $gianhap = number_format($price, 0);
     $giacu = number_format($price * 1.1, 0);
 ?>
     <div class="col-md-6 col-lg-4">
         <div class="card-box">
             <div class="card-thumbnail">
-                <img class="img-fluid" src="<?php echo $hinhsp; ?>" alt="Hình ảnh sản phẩm">
+                <img class="img-fluid" src="<?php echo $hinhsp; ?>" alt="Hình ảnh sản phẩm" width="100%" height="100px" />
             </div>
             <form method="post" action="sanpham/cart_update.php">
                 <h3 class="mt-2 text-danger">
@@ -31,6 +37,10 @@ foreach ($result as $row) {
                         <?php echo $tensp; ?>
                     </a>
                 </h3>
+                <p class="text-secondary"><?php echo $tenlsp; ?></p>
+                    
+               
+                                  
                 <p class="text-secondary"><?php echo $thongtinsp; ?></p>
                 <small class="text-muted">Giá cũ: <s><span><?php echo $giacu; ?> vnd</span></s></small>
                 <h6 class="price">Giá hiện tại: <span><?php echo $gianhap; ?> vnd</span></h6>

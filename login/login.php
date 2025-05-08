@@ -15,7 +15,7 @@ if (isset($_POST['dangnhap'])) {
   } else {
     // mã hóa pasword
     //$password = md5($password);
-    $sql = "SELECT USERNAME,PWD FROM users WHERE USERNAME='$username'";
+    $sql = "SELECT USERNAME,PWD,roles FROM users WHERE USERNAME='$username'";
     $lists = SelectAll($sql);
 
     if (count($lists) == 0) {
@@ -23,17 +23,18 @@ if (isset($_POST['dangnhap'])) {
     } else {
       foreach ($lists as $item)
         $mk = $item["PWD"];
-      
+        $role = $item["roles"];
       //So sánh 2 mật khẩu có trùng khớp hay không
       if (!password_verify($password, $mk)) {
         $msg = " Mật khẩu không đúng. Vui lòng nhập lại.";
       } else {
         //Lưu tên đăng nhập
         $_SESSION['username'] = $username;
-        
+        $_SESSION['role'] = $role;
         // echo "<script>window.alert('Login thành công');</script>";    
         // echo "Bạn vừa thêm: " .$id;           
-        echo "<script>location.href='index.php';</script>";
+         echo "<script>location.href='index.php';</script>";
+        
       }
     }
   }
@@ -54,7 +55,7 @@ disconnect_db();
                 <span class="input-group-text">
                   <span class="input-group-text">@</span>
                 </span>
-                <input type="text" class="form-control" name="txtuser" id="txtuser" value="" required>
+                <input type="text" class="form-control" name="txtuser" id="txtuser" value=""  required>
               </div>
             </div>
             <div class="col-12">
