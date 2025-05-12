@@ -13,21 +13,21 @@ if (!$idsp) {
 }
 
 // Truy vấn dữ liệu sản phẩm
-$sql = "SELECT IDSP, TENSP, GIANHAP, HINHSP, THONGTINSP FROM SAN_PHAM WHERE IDSP='$idsp'";
+$sql = "SELECT masp, tensp, gia, hinhanh, mota FROM SANPHAM WHERE maSP='$idsp'";
 $result = SelectAll($sql);
 
 foreach ($result as $row) {
-    $idsp = $row['IDSP'];
-    $tensp = $row['TENSP'];
-    $hinhsp = "images/" . $row['HINHSP'];
-    $thongtinsp = $row['THONGTINSP'] ?? "Đang cập nhật thông tin sản phẩm";
-    $price = $row['GIANHAP'];
-    $gianhap = number_format($row['GIANHAP'], 0);
-    $giacu = number_format($row['GIANHAP'] + ($row['GIANHAP'] * 10 / 100), 0);
+    $idsp = $row['masp'];
+    $tensp = $row['tensp'];
+    $hinhsp = "images/" . $row['hinhanh'];
+    $thongtinsp = $row['mota'] ?? "Đang cập nhật thông tin sản phẩm";
+    $price = $row['gia'];
+    $gianhap = number_format($row['gia'], 0);
+    $giacu = number_format($row['gia'] + ($row['gia'] * 10 / 100), 0);
 }
 ?>
 
-<form method="post" action="sanpham/cart_update.php">
+<form method="post" action="sanpham/add_to_cart.php">
     <div class="wrapper row">
         <div class="preview col-md-6">
             <div class="preview-pic tab-content">
@@ -81,7 +81,7 @@ foreach ($result as $row) {
             </div>
 
         <strong> 
-            <input type="hidden" name="product_code" value="<?php echo !empty($idsp) ? $idsp : ''; ?>" />
+            <input type="hidden" name="product_id" value="<?php echo !empty($idsp) ? $idsp : ''; ?>" />
             <input type="hidden" name="tensp" value="<?php echo !empty($tensp) ? $tensp : ''; ?>" />
             <input type="hidden" name="hinhanh" value="<?php echo !empty($hinhsp) ? $hinhsp : ''; ?>" />
             <input type="hidden" name="price" value="<?php echo !empty($price) ? $price : ''; ?>" />

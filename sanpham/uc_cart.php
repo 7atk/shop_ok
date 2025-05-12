@@ -1,5 +1,6 @@
 <?php
-include_once("config.php");
+ $connect = mysqli_connect('localhost','root','','game_store') or die("Không thể kết nối đến database");
+ mysqli_set_charset($connect,"utf8");
 
 //Khi bấm update
 if (isset($_POST['update'])) {

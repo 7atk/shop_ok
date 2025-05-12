@@ -35,11 +35,14 @@ if (!empty($_POST['ok'])) {
     $idloai = trim($_POST['idloai'] ?? '');
     $gia = trim($_POST['gianhap'] ?? '');
     $ttsp = trim($_POST['ttsp'] ?? '');
+    $slnhap = trim($_POST['ttsp'] ?? '');
 
     if (empty($masp)) $errors['masp'] = "<span style='color:red;'>Chưa nhập mã sản phẩm</span>";
     if (empty($tensp)) $errors['tensp'] = "<span style='color:red;'>Chưa nhập tên sản phẩm</span>";
     if (empty($gia) || !is_numeric($gia)) $errors['gia'] = "<span style='color:red;'>Giá không hợp lệ</span>";
     if (empty($idloai)) $errors['idloai'] = "<span style='color:red;'>Chưa chọn loại sản phẩm</span>";
+    if (empty($ttsp)) $errors['ttsp'] = "<span style='color:red;'>Chưa nhập thông tin sản phẩm</span>";
+    if (empty($slnhap) || !is_numeric($slnhap)) $errors['slnhap'] = "<span style='color:red;'>Số lượng không hợp lệ</span>";
 
     if (!$errors) {
         // Kiểm tra mã sản phẩm đã tồn tại chưa
@@ -50,8 +53,8 @@ if (!empty($_POST['ok'])) {
         //    echo "<script>location.href='index.php?page=add_sanpham';</script>";
         // }
         // else {
-            $sql_insert = "INSERT INTO sanpham (masp, tensp, idlsp,mota, hinhanh, gia)
-            VALUES ('$masp','$tensp' ,'$idloai', '$ttsp','$tenfile' , '$gia')";
+            $sql_insert = "INSERT INTO sanpham (masp, tensp, idlsp,mota, hinhanh, gia, slnhap)
+            VALUES ('$masp','$tensp' ,'$idloai', '$ttsp','$tenfile' , '$gia','$slnhap')";
              $id = Execute($sql_insert); // Execute() phải là hàm bạn đã định nghĩa để thực thi câu SQL
 
              if ($id > 0) {
@@ -144,6 +147,16 @@ if (!empty($_POST['ok'])) {
                                value="<?= htmlspecialchars($gia ?? '') ?>" />
                         <?php if (!empty($errors['gia'])): ?>
                             <div class="text-danger"><?= $errors['gia'] ?></div>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>so luong nhập:</td>
+                    <td>
+                        <input name="slnhap" type="text" required id="slnhap" class="form-control"
+                               value="<?= htmlspecialchars($slnhap ?? '') ?>" />
+                        <?php if (!empty($errors['slnhap'])): ?>
+                            <div class="text-danger"><?= $errors['slnhap'] ?></div>
                         <?php endif; ?>
                     </td>
                 </tr>

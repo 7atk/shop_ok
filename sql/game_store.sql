@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 08, 2025 lúc 06:54 PM
+-- Thời gian đã tạo: Th5 12, 2025 lúc 10:38 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Phiên bản PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,17 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `game_store`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL,
+  `created_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -43,6 +54,18 @@ INSERT INTO `loai_sp` (`idlsp`, `tenlsp`) VALUES
 (4, 'FPS'),
 (5, 'FAMILY'),
 (6, 'Máy chơi game');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `total` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -77,15 +100,17 @@ CREATE TABLE `sanpham` (
   `idlsp` int(11) NOT NULL,
   `mota` varchar(255) NOT NULL,
   `hinhanh` varchar(255) NOT NULL,
-  `gia` int(11) DEFAULT NULL
+  `gia` int(11) DEFAULT NULL,
+  `slnhap` int(11) DEFAULT NULL,
+  `slban` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `sanpham`
 --
 
-INSERT INTO `sanpham` (`id`, `masp`, `tensp`, `idlsp`, `mota`, `hinhanh`, `gia`) VALUES
-(22, 'GB1', 'Gameboy advance', 6, 'only one', 'img_681c6006eb04a.jpg', 99999);
+INSERT INTO `sanpham` (`id`, `masp`, `tensp`, `idlsp`, `mota`, `hinhanh`, `gia`, `slnhap`, `slban`) VALUES
+(22, 'GB1', 'Gameboy advance', 6, 'only one', 'img_681c6006eb04a.jpg', 99999, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,10 +139,22 @@ INSERT INTO `users` (`id_user`, `username`, `PWD`, `email`, `roles`) VALUES
 --
 
 --
+-- Chỉ mục cho bảng `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `loai_sp`
 --
 ALTER TABLE `loai_sp`
   ADD PRIMARY KEY (`idlsp`);
+
+--
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `roles`
@@ -144,10 +181,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `loai_sp`
 --
 ALTER TABLE `loai_sp`
   MODIFY `idlsp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`

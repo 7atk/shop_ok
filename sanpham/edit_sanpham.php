@@ -1,18 +1,22 @@
 <?php
 $errors = [];
-if(!isset($_GET['idsp'])) {
+if(!isset($_GET['masp'])) {
     echo "<script>alert('Không có mã sản phẩm'); location.href='index.php?page=list_sanpham';</script>";
     exit;
 }
-$idsp = $_GET['idsp'] ;
-$sql = "SELECT IDSP, TENSP, GIANHAP, HINHSP, THONGTINSP FROM san_pham WHERE IDSP='$idsp'";
+$idsp = $_GET['masp'] ;
+$sql = "SELECT masp, tensp, mota, hinhanh, gia,slnhap,slban FROM sanpham s   WHERE masp='$idsp'";
 $result = SelectAll($sql);
 foreach ($result as $row) {
-    $idsp = $row['IDSP'] ?? '';  
-    $tensp = htmlspecialchars($row['TENSP'] ?? 'Không có tên');  
-    $hinhsp = !empty($row['HINHSP']) ? "images/" . htmlspecialchars($row['HINHSP']) : "images/no-image.png";  
-    $thongtinsp = htmlspecialchars($row['THONGTINSP'] ?? 'Đang cập nhật thông tin sản phẩm');  
-    $gia = is_numeric($row['GIANHAP']) ? $row['GIANHAP'] : 0;
+    $idsp = $row['masp'] ?? '';  
+    $tensp = htmlspecialchars($row['tensp'] ?? 'Không có tên');  
+    
+    $hinhsp = !empty($row['hinhanh']) ? "images/" . htmlspecialchars($row['hinhanh']) : "images/no-image.png";  
+    $thongtinsp = htmlspecialchars($row['mota'] ?? 'Đang cập nhật thông tin sản phẩm');  
+    $gia = is_numeric($row['gia']) ? $row['gia'] : 0;
+    $slnhap = htmlspecialchars($row['slnhap'] ?? '');
+    $slban = htmlspecialchars($row['slban'] ?? '');
+
    
 }
 if (!empty($_POST['ok'])) {
@@ -37,16 +41,21 @@ if (!empty($_POST['ok'])) {
     $idsp = trim($_POST['idsp'] ?? '');
     $tensp = trim($_POST['tensp'] ?? '');
     $idloai = trim($_POST['idloai'] ?? '');
-    $gia = trim($_POST['gianhap'] ?? '');
+    $gia = trim($_POST['gia'] ?? '');
     $ttsp = trim($_POST['ttsp'] ?? '');
+    $slnhap = trim($_POST['slnhap'] ?? '');
+    $slban = trim($_POST['slban'] ?? '');
 
     if (empty($idsp)) $errors['idsp'] = "<span style='color:red;'>Chưa nhập mã sản phẩm</span>";
     if (empty($tensp)) $errors['tensp'] = "<span style='color:red;'>Chưa nhập tên sản phẩm</span>";
     if (empty($gia) || !is_numeric($gia)) $errors['gia'] = "<span style='color:red;'>Giá không hợp lệ</span>";
     if (empty($idloai)) $errors['idloai'] = "<span style='color:red;'>Chưa chọn loại sản phẩm</span>";
+    if (empty($ttsp)) $errors['ttsp'] = "<span style='color:red;'>Chưa nhập thông tin sản phẩm</span>";
+    if (empty($slnhap) || !is_numeric($slnhap)) $errors['slnhap'] = "<span style='color:red;'>Số lượng không hợp lệ</span>";
+    if (empty($slban) || !is_numeric($slban)) $errors['slban'] = "<span style='color:red;'>Số lượng không hợp lệ</span>";
 
     if (!$errors) {
-        $sql_update = "UPDATE san_pham SET  IDLSP='$idloai', TENSP='$tensp', HINHSP='$tenfile', THONGTINSP='$ttsp', GIANHAP='$gia' WHERE IDSP='$idsp'";
+        $sql_update = "UPDATE sanpham SET  masp  ='$idloai', tensp='$tensp', hinhanh='$tenfile', mota='$ttsp', gia='$gia',slnhap='$slnhap',slban='$slban' WHERE IDSP='$idsp'";
                        
         $id = Execute($sql_update); // Execute() phải là hàm bạn đã định nghĩa để thực thi câu SQL
 
@@ -88,7 +97,7 @@ if (!empty($_POST['ok'])) {
 //     $idsp = trim($_POST['idsp'] ?? '');
 //     $tensp = trim($_POST['tensp'] ?? '');
 //     $idloai = trim($_POST['idloai'] ?? '');
-//     $gia = trim($_POST['gianhap'] ?? '');
+//     $gia = trim($_POST['gia'] ?? '');
 //     $ttsp = trim($_POST['ttsp'] ?? '');
 
 //     if (empty($idsp)) $errors['idsp'] = "<span style='color:red;'>Chưa nhập mã sản phẩm</span>";
@@ -97,7 +106,7 @@ if (!empty($_POST['ok'])) {
 //     if (empty($idloai)) $errors['idloai'] = "<span style='color:red;'>Chưa chọn loại sản phẩm</span>";
 
 //     if (!$errors) {
-//         $sql_insert = "INSERT INTO san_pham (IDSP, IDLSP, TENSP, HINHSP, THONGTINSP, GIANHAP)
+//         $sql_insert = "INSERT INTO san_pham (IDSP, IDLSP, TENSP, HINHSP, THONGTINSP, gia)
 //                        VALUES ('$idsp', '$idloai', '$tensp', '$tenfile', '$ttsp', '$gia')";
 //         $id = Execute($sql_insert); // Execute() phải là hàm bạn đã định nghĩa để thực thi câu SQL
 
@@ -131,12 +140,12 @@ if (!empty($_POST['ok'])) {
                         <select class="form-select btn-warning text-start" name="idloai">
                             <option value="" selected>Loại sản phẩm</option>
                             <?php
-                            $sql = "SELECT IDLSP, TENLOAI FROM LOAI_SP";
+                            $sql = "SELECT IDLSP, tenlsp FROM LOAI_SP";
                             $result = SelectAll($sql);
                             if (!empty($result)) {
                                 foreach ($result as $item) {
                                     $selected = (!empty($idloai) && $idloai == $item['IDLSP']) ? "selected" : "";
-                                    echo "<option value='{$item['IDLSP']}' $selected>{$item['TENLOAI']}</option>";
+                                    echo "<option value='{$item['IDLSP']}' $selected>{$item['tenlsp']}</option>";
                                 }
                             }
                             ?>
@@ -182,10 +191,30 @@ if (!empty($_POST['ok'])) {
                 <tr>
                     <td>Giá nhập:</td>
                     <td>
-                        <input name="gianhap" type="text" required id="gianhap" class="form-control"
+                        <input name="gia" type="text" required id="gia" class="form-control"
                                value="<?= htmlspecialchars($gia ?? '') ?>" />
                         <?php if (!empty($errors['gia'])): ?>
                             <div class="text-danger"><?= $errors['gia'] ?></div>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>sl nhập:</td>
+                    <td>
+                        <input name="slnhap" type="text" required id="slnhap" class="form-control"
+                               value="<?= htmlspecialchars($slnhap ?? '') ?>" />
+                        <?php if (!empty($errors['slnhap'])): ?>
+                            <div class="text-danger"><?= $errors['slnhap'] ?></div>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>sl sold:</td>
+                    <td>
+                        <input name="slban" type="text" required id="slnban" class="form-control"
+                               value="<?= htmlspecialchars($slban ?? '') ?>" />
+                        <?php if (!empty($errors['slban'])): ?>
+                            <div class="text-danger"><?= $errors['slban'] ?></div>
                         <?php endif; ?>
                     </td>
                 </tr>
