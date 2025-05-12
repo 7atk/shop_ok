@@ -45,7 +45,7 @@ if (isset($_POST['btnempty']))
 
         $sql = substr($sql, 0, -1) . ") ORDER BY MASP ASC";
 
-        $query = mysqli_query($db, $sql);
+        $query = mysqli_query($connect, $sql);
         $totalprice = 0;
         $cart_items = 0;
         while ($row = mysqli_fetch_array($query)) {

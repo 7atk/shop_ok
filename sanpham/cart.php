@@ -1,3 +1,7 @@
+<?php
+session_start();
+$connect = mysqli_connect('localhost','root','','game_store') or die("Không thể kết nối đến database");
+mysqli_set_charset($connect,"utf8");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,27 +19,56 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>masp</th>
-        <th>tensp</th>
-        <th>so luong</th>
+      <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+    <?php
+
+$sql = "SELECT * FROM sanpham WHERE MASP IN (";
+
+foreach ($_SESSION['cart'] as $id => $value) {
+    $sql .= $id . ",";
+}
+
+$sql = substr($sql, 0, -1) . ") ORDER BY MASP ASC";
+
+$query = mysqli_query($connect, $sql);
+$totalprice = 0;
+$cart_items = 0;
+while ($row = mysqli_fetch_array($query)) {
+    $idsp = $row['MASP']; // Ensure the column name matches your database schema
+    $subtotal = $_SESSION['cart'][$idsp]['quantity'] * $row['gianhap'];
+    $totalprice += $subtotal;
+    $cart_items++;
+?>
+
+    <tr>
+        <td class="text-center"><?php echo $cart_items; ?></td>
+        <td><?php echo $row['idsp'] ?></td>
+        <td>
+
+            <?php echo '<a class="btn link-danger" href="default.php?page=uc_product_detail&action=add&idsp=' . $row["idsp"] . '">' . $row["tensp"] . '</a>'; ?>
+        </td>
+        <td class="text-end"><?php echo number_format($row['gianhap']) ?></td>
+        <td>
+            <input type="number" class="form-control text-primary float-end" name="quantity[<?php echo $row['idsp'] ?>]" style="width: 4rem;" min="0" max="10" value="<?php echo $_SESSION['cart'][$row['idsp']]['quantity'] ?>">
+        </td>
+
+        <td class="text-end"><?php echo number_format($_SESSION['cart'][$row['idsp']]['quantity'] * $row['gianhap']) ?></td>
+        <input type="hidden" name="sl" value="<?php echo !empty($quantity) ? $quantity : '1'; ?>" />
+        <input type="hidden" name="idsp" value="<?php echo !empty($row['idsp']) ? $row['idsp'] : ''; ?>" />
+    </tr>
+<?php
+}
+?>
+<tr class="bg-secondary ">
+    <td colspan="6" class="text-end text-white fw-bold">Total Price: <?php echo number_format($totalprice, 0) ?></td>
+</tr>   
     </tbody>
   </table>
 </div>
