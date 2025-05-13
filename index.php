@@ -110,7 +110,7 @@ else
 					</ul>
 					<div class="navbar-nav">
 						<?php echo $link; ?>
-						<a href="index.php?page=viewcart" class="nav-item nav-link text-nowrap">
+						<a href="index.php?page=cart" class="nav-item nav-link text-nowrap">
 							Giỏ hàng <span class="badge bg-danger">
 								<?php
 									if(isset($_SESSION['cart'])){
@@ -161,18 +161,19 @@ else
 					$page = "sanpham/add_sanpham";
 					$title = "THÊM MỚI SẢN PHẨM";
 				}
-				if ($page == "viewcart") {
-					$page = "sanpham/vcart";
+				if ($page == "cart") {
+					$page = "sanpham/cart";
 					$title = "QUẢN LÝ GIỎ HÀNG";
 				}
-				if ($page == "cart_update") {
-					$page = "sanpham/cart_update";
-					$title = "QUẢN LÝ GIỎ HÀNG cart_update";
-				}
-				if ($page == "uc_checkout") {
-					$page = "sanpham/uc_checkout";
-					$title = "ĐẶT HÀNG VÀ THANH TOÁN";
-				}
+				
+				// if ($page == "cadd_to_cart") {
+				// 	$page = "sanpham/add_to_cart";
+				// 	$title = "QUẢN LÝ GIỎ HÀNG cart_update";
+				// }
+				// if ($page == "uc_checkout") {
+				// 	$page = "sanpham/uc_checkout";
+				// 	$title = "ĐẶT HÀNG VÀ THANH TOÁN";
+				// }
 				if ($page == "search") {
 					$page = "sanpham/search";
 					$title = "DANH SÁCH SẢN PHẨM TÌM THẤY";
@@ -185,6 +186,13 @@ else
 				if ($page == "resetPassword") {
 					$page = "login/resetPassword";
 					$title = "ĐẶT LẠI MẬT KHẨU";
+					
+					
+				}
+				if ($page == "delete_cart") {
+					$page = "sanpham/delete_cart";
+					$title = "XÓA SẢN PHẨM TRONG GIỎ HÀNG";
+					
 					
 					
 				}

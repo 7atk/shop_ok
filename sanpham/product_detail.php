@@ -27,7 +27,7 @@ foreach ($result as $row) {
 }
 ?>
 
-<form method="post" action="sanpham/add_to_cart.php">
+<form method="post" action="sanpham/add_to_cart.php" >
     <div class="wrapper row">
         <div class="preview col-md-6">
             <div class="preview-pic tab-content">
@@ -77,11 +77,11 @@ foreach ($result as $row) {
             </div>
 
             <div class="action">
-                <button class="btn btn-danger" type="submit">Add To Cart</button>
+                <button class="btn btn-sm btn-danger mb-1" name="add_to_cart">Add To Cart</button>
             </div>
 
         <strong> 
-            <input type="hidden" name="product_id" value="<?php echo !empty($idsp) ? $idsp : ''; ?>" />
+            <input type="hidden" name="masp" value="<?php echo !empty($idsp) ? $idsp : ''; ?>" />
             <input type="hidden" name="tensp" value="<?php echo !empty($tensp) ? $tensp : ''; ?>" />
             <input type="hidden" name="hinhanh" value="<?php echo !empty($hinhsp) ? $hinhsp : ''; ?>" />
             <input type="hidden" name="price" value="<?php echo !empty($price) ? $price : ''; ?>" />

@@ -31,7 +31,7 @@ foreach ($result as $row) {
             <div class="card-thumbnail">
                 <img class="img-fluid" src="<?php echo $hinhsp; ?>" alt="Hình ảnh sản phẩm" width="100%" height="100px" />
             </div>
-            <form method="post" action="sanpham/cart_update.php">
+            <form method="post" action="sanpham/add_to_cart.php" class="card-body">
                 <h3 class="mt-2 text-danger">
                     <a href="index.php?page=product_detail&id=<?php echo htmlspecialchars($idsp); ?>">
                         <?php echo $tensp; ?>
@@ -45,8 +45,8 @@ foreach ($result as $row) {
                 <small class="text-muted">Giá cũ: <s><span><?php echo $giacu; ?> vnd</span></s></small>
                 <h6 class="price">Giá hiện tại: <span><?php echo $gianhap; ?> vnd</span></h6>
                 <input type="number" name="quantity" min="1" max="10" value="1" class="text-center" />
-                <button class="btn btn-sm btn-danger mb-1">Add To Cart</button>
-                <input type="hidden" name="product_code" value="<?php echo htmlspecialchars($idsp); ?>" />
+                <button class="btn btn-sm btn-danger mb-1" name="add_to_cart">Add To Cart</button>
+                <input type="hidden" name="masp" value="<?php echo htmlspecialchars($idsp); ?>" />
                 <input type="hidden" name="tensp" value="<?php echo $tensp; ?>" />
                 <input type="hidden" name="hinhsp" value="<?php echo $hinhsp; ?>" />
                 <input type="hidden" name="price" value="<?php echo $price; ?>" />

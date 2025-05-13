@@ -1,11 +1,8 @@
-<?php
-session_start();
-$connect = mysqli_connect('localhost','root','','game_store') or die("Không thể kết nối đến database");
-mysqli_set_charset($connect,"utf8");?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Giỏ hàng</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,63 +11,68 @@ mysqli_set_charset($connect,"utf8");?>
 <body>
 
 <div class="container mt-3">
-  <h2>Hover Rows</h2>
-  <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>            
-  <table class="table table-hover">
-    <thead>
-      <tr>
-      <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Đơn giá</th>
-                <th>Thành tiền</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php
+  <h2>Giỏ hàng của bạn</h2>
+  <p>Danh sách sản phẩm trong giỏ hàng:<a href="index.php">Muốn đặt thêm hàng ?</a></p>
 
-$sql = "SELECT * FROM sanpham WHERE MASP IN (";
+  <?php if (!empty($_SESSION['cart'])): ?>
+    <form method="post" action="index.php?page=delete_cart">
+      <input class="btn btn-warning mb-2 float-end" type="submit" name="deletecart" value="Xóa toàn bộ" onclick="return confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?');" />
+    </form>
 
-foreach ($_SESSION['cart'] as $id => $value) {
-    $sql .= $id . ",";
-}
+    <table class="table table-hover table-bordered text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>STT</th>
+          <th>Mã sản phẩm</th>
+          <th>Tên sản phẩm</th>
+          <th>Hình ảnh</th>
+          <th>Số lượng</th>
+          <th>Đơn giá</th>
+          <th>Thành tiền</th>
+          <th>Xóa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $STT = 1;
+        $total = 0;
+        foreach ($_SESSION['cart'] as $item):
+          $subtotal = $item['price'] * $item['quantity'];
+          $total += $subtotal;
+        ?>
+        <tr>
+          <td><?php echo $STT++; ?></td>
+          <td><?php echo htmlspecialchars($item['id']); ?></td>
+          <td><?php echo htmlspecialchars($item['name']); ?></td>
+          <td><img src="<?php echo htmlspecialchars($item['image']); ?>" width="80" /></td>
+          <td><?php echo $item['quantity']; ?></td>
+          <td><?php echo number_format($item['price'], 0, ',', '.'); ?> đ</td>
+          <td><?php echo number_format($subtotal, 0, ',', '.'); ?> đ</td>
+          <td>
+            <form method="post" action="index.php?page=delete_cart" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+              <input type="hidden" name="masp" value="<?php echo htmlspecialchars($item['id']); ?>" />
+              <input class="btn btn-sm btn-danger" type="submit" name="deleteproduct" value="Xóa" />
+            </form>
+          </td>
+        </tr>
+        <?php endforeach; ?>
+        <tr>
+          <td colspan="6" class="text-end"><strong>Tổng cộng:</strong></td>
+          <td colspan="2"><strong><?php echo number_format($total, 0, ',', '.'); ?> đ</strong></td>
+        </tr>
+        <tr>
+          <td colspan="8">
+            <form method="post" action="index.php?page=checkout">
+              <input class="btn btn-success" type="submit" name="checkout" value="Thanh toán" />
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <?php else: ?>
+    <div class="alert alert-info">Giỏ hàng của bạn hiện đang trống.<a href="index.php">Muốn đặt hàng ?</a></div>
+  <?php endif; ?>
 
-$sql = substr($sql, 0, -1) . ") ORDER BY MASP ASC";
-
-$query = mysqli_query($connect, $sql);
-$totalprice = 0;
-$cart_items = 0;
-while ($row = mysqli_fetch_array($query)) {
-    $idsp = $row['MASP']; // Ensure the column name matches your database schema
-    $subtotal = $_SESSION['cart'][$idsp]['quantity'] * $row['gianhap'];
-    $totalprice += $subtotal;
-    $cart_items++;
-?>
-
-    <tr>
-        <td class="text-center"><?php echo $cart_items; ?></td>
-        <td><?php echo $row['idsp'] ?></td>
-        <td>
-
-            <?php echo '<a class="btn link-danger" href="default.php?page=uc_product_detail&action=add&idsp=' . $row["idsp"] . '">' . $row["tensp"] . '</a>'; ?>
-        </td>
-        <td class="text-end"><?php echo number_format($row['gianhap']) ?></td>
-        <td>
-            <input type="number" class="form-control text-primary float-end" name="quantity[<?php echo $row['idsp'] ?>]" style="width: 4rem;" min="0" max="10" value="<?php echo $_SESSION['cart'][$row['idsp']]['quantity'] ?>">
-        </td>
-
-        <td class="text-end"><?php echo number_format($_SESSION['cart'][$row['idsp']]['quantity'] * $row['gianhap']) ?></td>
-        <input type="hidden" name="sl" value="<?php echo !empty($quantity) ? $quantity : '1'; ?>" />
-        <input type="hidden" name="idsp" value="<?php echo !empty($row['idsp']) ? $row['idsp'] : ''; ?>" />
-    </tr>
-<?php
-}
-?>
-<tr class="bg-secondary ">
-    <td colspan="6" class="text-end text-white fw-bold">Total Price: <?php echo number_format($totalprice, 0) ?></td>
-</tr>   
-    </tbody>
-  </table>
 </div>
 
 </body>
