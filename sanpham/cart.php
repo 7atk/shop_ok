@@ -17,10 +17,8 @@
   if (!isset($_SESSION['username'])) {
     echo "<div class='alert alert-danger'>Bạn cần đăng nhập để xem giỏ hàng.</div>";
     echo "<script>window.location.href='index.php?page=login';</script>";
-  } else{
-       if (isset($_SESSION['cart'])) {
-      echo "<div class='alert alert-success'>Giỏ hàng của bạn đã được cập nhật thành công.</div>";
-    }}
+  } 
+  
   
   ?>
 
