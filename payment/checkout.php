@@ -39,8 +39,8 @@ if (isset($_POST['checked'])) {
                 $price = (int)$item['price'];
                 $totalPrice = $quantity * $price;
 
-                $sqlItem = "INSERT INTO order_items (order_id, product_id, quantity, price, subtotal)
-                            VALUES ('$orderId', '$productId', '$quantity', '$price', '$totalPrice')";
+                $sqlItem = "INSERT INTO order_items (order_id, product_id, quantity, price, subtotal,order_time)
+                            VALUES ('$orderId', '$productId', '$quantity', '$price', '$totalPrice','$date')";
                 mysqli_query($connect, $sqlItem);
             }
 
