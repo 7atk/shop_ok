@@ -38,7 +38,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard - Doanh Thu</title>
+    <title>Admin Dashboard - Doanh Thu - Game Store - 19</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap 5 CSS -->

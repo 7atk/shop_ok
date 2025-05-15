@@ -37,14 +37,14 @@ else
 						<!-- The slideshow/carousel -->
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="images/main-banner1-1440x550.jpg" height="200px" class="d-block w-100">
+								<img src="https://as2.ftcdn.net/v2/jpg/05/20/20/63/1000_F_520206342_nwqo1KdEVukRtUvNdhYr762CTH6FXfAO.jpg" height="200px" class="d-block w-100">
 								<div class="carousel-caption">
 									<h3>One day gamer whole life gamers</h3>
 									<p>We have every fucking games you want You just search it </p>
 								</div>
 							</div>
 							<div class="carousel-item">
-								<img src="images/main-banner2-1440x550.jpg" height="200px" class="d-block w-100">
+								<img src="https://as1.ftcdn.net/v2/jpg/02/77/99/06/1000_F_277990656_yaQ85EN20Wx3WUH2pJD57yHJOe5kluOa.jpg" height="200px" class="d-block w-100">
 								<div class="carousel-caption">
 								<h3>No.1 Game store on world</h3>
 									<p>Best Place for who is gamer</p>
@@ -71,14 +71,14 @@ else
 				<div class="collapse navbar-collapse" id="mynbar">
 					<ul class="navbar-nav me-auto">						
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownsp" role="button" 
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm </a>
+							<a class="nav-link dropdown-toggle" href="http://localhost/shop_ok/admin/dashboard.php" id="navbarDropdownsp" role="button" 
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quản Lý </a>
 							<div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownsp">								
 								<a class="dropdown-item" href="index.php?page=list_sanpham">List sản phẩm</a>
 								<a class="dropdown-item" href="index.php?page=add_sanpham">Thêm sản phẩm</a>
 							</div>
 						</li>
-						<li class="nav-item dropdown">
+						<!-- <li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownkm" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khuyến mãi </a>
 							<div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownkm">
 								<a class="dropdown-item" href="sony.php">Giáng Sinh</a>
@@ -87,7 +87,7 @@ else
 								<a class="dropdown-item" href="sanpham.php">Tết âm lịch</a>
 								<a class="dropdown-item" href="vietnhat.php">Tết dương lịch</a>
 							</div>
-						</li>
+						</li> -->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownkm" role="button" 
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thể loại sản phẩm</a>
@@ -101,12 +101,12 @@ else
 								?>
 							</div>
 						</li>
-						<li class="nav-item text-nowrap">
+						<!-- <li class="nav-item text-nowrap">
 							<a class="nav-link" href="#">Bảo hành</a>
 						</li>
 						<li class="nav-item text-nowrap">
-							<a class="nav-link" href="#">Liên hệ</a>
-						</li>
+							<a class="nav-link" href="http://localhost/shop_ok/admin/dashboard.php">Quản Lý</a>
+						</li> -->
 					</ul>
 					<div class="navbar-nav">
 						<?php echo $link; ?>
