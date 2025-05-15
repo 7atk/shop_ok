@@ -1,8 +1,8 @@
 <?php
 if (!isset($_SESSION))
   session_start();
-  $connect = mysqli_connect('localhost','root','','game_store') or die("Không thể kết nối đến database");
-	mysqli_set_charset($connect,"utf8");
+  // $connect = mysqli_connect('localhost','root','','game_store') or die("Không thể kết nối đến database");
+	// mysqli_set_charset($connect,"utf8");
 //Xử lý đăng nhập
 if (isset($_POST['dangnhap'])) {
   //Lấy dữ liệu nhập vào
@@ -31,6 +31,7 @@ if (isset($_POST['dangnhap'])) {
         //Lưu tên đăng nhập
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $role;
+      
         // echo "<script>window.alert('Login thành công');</script>";    
         // echo "Bạn vừa thêm: " .$id;           
          echo "<script>location.href='index.php';</script>";

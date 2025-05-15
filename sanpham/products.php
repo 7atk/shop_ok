@@ -55,8 +55,8 @@ foreach ($result as $row) {
                     $return_url = base64_encode(urlencode("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'])); 
                 ?>
                 <input type="hidden" name="return_url" value="<?php echo $return_url; ?>" />
-                <a class="btn btn-sm btn-danger float-end" href="index.php?page=product_detail&id=<?php echo htmlspecialchars($idsp); ?>">
-                    <b class="btn link-primary">Chi tiết</b>
+                <a  href="index.php?page=product_detail&id=<?php echo htmlspecialchars($idsp); ?>">
+                    <b class="btn link-info">Chi tiết</b>
                 </a>
             </form>
         </div>

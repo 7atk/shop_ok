@@ -13,6 +13,16 @@
 <div class="container mt-3">
   <h2>Giỏ hàng của bạn</h2>
   <p>Danh sách sản phẩm trong giỏ hàng:<a href="index.php">Muốn đặt thêm hàng ?</a></p>
+  <?php 
+  if (!isset($_SESSION['username'])) {
+    echo "<div class='alert alert-danger'>Bạn cần đăng nhập để xem giỏ hàng.</div>";
+    echo "<script>window.location.href='index.php?page=login';</script>";
+  } else{
+       if (isset($_SESSION['cart'])) {
+      echo "<div class='alert alert-success'>Giỏ hàng của bạn đã được cập nhật thành công.</div>";
+    }}
+  
+  ?>
 
   <?php if (!empty($_SESSION['cart'])): ?>
     <form method="post" action="index.php?page=delete_cart">
@@ -39,6 +49,8 @@
         foreach ($_SESSION['cart'] as $item):
           $subtotal = $item['price'] * $item['quantity'];
           $total += $subtotal;
+        
+        
         ?>
         <tr>
           <td><?php echo $STT++; ?></td>
@@ -55,10 +67,10 @@
             </form>
           </td>
         </tr>
-        <?php endforeach; ?>
+        <?php endforeach;$_SESSION['total'] = $total;  ?>
         <tr>
           <td colspan="6" class="text-end"><strong>Tổng cộng:</strong></td>
-          <td colspan="2"><strong><?php echo number_format($total, 0, ',', '.'); ?> đ</strong></td>
+          <td colspan="2"><strong><?php echo number_format($total, 0, ',', '.');  ?> đ</strong></td>
         </tr>
         <tr>
           <td colspan="8">

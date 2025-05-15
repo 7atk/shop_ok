@@ -1,8 +1,8 @@
 <?php
 
 
-	$connect = mysqli_connect('localhost','root','','game_store') or die("Không thể kết nối đến database");
-	mysqli_set_charset($connect,"utf8");
+	// $connect = mysqli_connect('localhost','root','','game_store') or die("Không thể kết nối đến database");
+	// mysqli_set_charset($connect,"utf8");
 
 ?>
 <!DOCTYPE html>
@@ -26,14 +26,16 @@
 			
 			// Kiểm tra xem tên đăng nhập đã tồn tại chưa   
       $sql = "SELECT * FROM users WHERE USERNAME='$user_name'";
-      $result = mysqli_query($connect, $sql);
-      if (mysqli_num_rows($result) > 0) {
+      $result =SelectAll($sql);
+      // if (mysqli_num_rows($result) > 0) {
+      if (count($result) > 0) {
         echo "<script>alert('Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.');</script>";
       } else {
         // Kiểm tra xem email đã tồn tại chưa
         $sql = "SELECT * FROM users WHERE EMAIL='$email'";
-        $result = mysqli_query($connect, $sql);
-        if (mysqli_num_rows($result) > 0) {
+        $result = SelectAll($sql);
+        // if (mysqli_num_rows($result) > 0) {
+        if (count($result) > 0) {
           echo "<script>alert('Email đã tồn tại. Vui lòng chọn email khác.');</script>";
         }elseif
          ($pass1 != $pass2) {
@@ -44,12 +46,13 @@
           $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
           // Thực hiện thêm người dùng mới vào cơ sở dữ liệu
           $sql = "INSERT INTO users (USERNAME, PWD, EMAIL,roles) VALUES ('$user_name', '$hashed_password', '$email', '$roles')";
-          if (mysqli_query($connect, $sql)) {
+          $result=execute($sql);
+          if (  $result) {
             echo "<script>alert('Đăng ký thành công!');</script>";
             // Chuyển hướng đến trang đăng nhập hoặc trang khác
             echo "<script>location.href='index.php?page=login';</script>";
           } else {
-            echo "<script>alert('Lỗi: " . mysqli_error($connect) . "');</script>";
+            echo "<script>alert('Lỗi: ');</script>";
           }
         } 
       }

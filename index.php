@@ -165,6 +165,11 @@ else
 					$page = "sanpham/cart";
 					$title = "QUẢN LÝ GIỎ HÀNG";
 				}
+				if ($page == "checkout") {
+					$page = "payment/checkout";
+					$title = "THANH TOÁN";
+				}
+				
 				
 				// if ($page == "cadd_to_cart") {
 				// 	$page = "sanpham/add_to_cart";
