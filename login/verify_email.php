@@ -1,7 +1,6 @@
 <?php
 // Include database connection
-$connect = mysqli_connect('localhost','root','','admin123') or die("Không thể kết nối đến database");
-mysqli_set_charset($connect,"utf8");
+include('../configg.php');
 $email = $_SESSION['email'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

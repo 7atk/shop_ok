@@ -35,7 +35,7 @@ if (!empty($_POST['ok'])) {
     $idloai = trim($_POST['idloai'] ?? '');
     $gia = trim($_POST['gianhap'] ?? '');
     $ttsp = trim($_POST['ttsp'] ?? '');
-    $slnhap = trim($_POST['ttsp'] ?? '');
+    $slnhap = trim($_POST['slnhap'] ?? '');
 
     if (empty($masp)) $errors['masp'] = "<span style='color:red;'>Chưa nhập mã sản phẩm</span>";
     if (empty($tensp)) $errors['tensp'] = "<span style='color:red;'>Chưa nhập tên sản phẩm</span>";

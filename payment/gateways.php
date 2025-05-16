@@ -1,7 +1,6 @@
 <?php
 session_start();
-$connect = mysqli_connect('localhost', 'root', '', 'game_store') or die("Không thể kết nối đến database");
-mysqli_set_charset($connect, "utf8");
+include('../configg.php');
 
    
     if(isset($_POST['accept'])){
@@ -12,7 +11,7 @@ mysqli_set_charset($connect, "utf8");
     $address = $_SESSION['caddress'];
     $email = $_SESSION['cemail'];
     $date = date("Y-m-d H:i:s");
-    $orderId = $_SESSION['orderId'];
+    $orderId = $_SESSION['order_id'];
         // Thêm vào bảng orders
         $sql = "INSERT INTO orders ( customer_name, phone, address, email, payment_method, order_date)
                 VALUES ('$name', '$phone', '$address', '$email', '$payment', '$date')";
@@ -33,12 +32,16 @@ mysqli_set_charset($connect, "utf8");
             // Xóa giỏ hàng sau khi đặt hàng thành công
             unset($_SESSION['cart']);
             unset($_SESSION['total']);
-            header('Location: index.php?page=thankyou');
+            
+        echo "<script>alert('Đặt hàng thành công! Mã đơn hàng của bạn là: " . htmlspecialchars($orderId) . "');</script>";
+        echo "<script>window.location.href='../index.php';</script>"; 
+           
             exit();
         } else {
             echo "Lỗi: " . mysqli_error($connect);
         }
     }
+   
     ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -65,6 +68,26 @@ mysqli_set_charset($connect, "utf8");
       font-size: 16px;
       cursor: pointer;
     }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #aaa;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
   </style>
 </head>
 <body>
@@ -78,13 +101,15 @@ mysqli_set_charset($connect, "utf8");
   <div class="buttons">
     <form method="post" >
     <input type="hidden" name="accept">
-    <button onclick="alert('Bạn đã nhấn nút Xác nhận')" >Xác nhận</button>
+    <button   >Xác nhận</button>
     </form>
-    <form method="post" action="index.php?page=delete_cart">
+    <form method="post" action="../sanpham/delete_cart">
       <input type="hidden" name="deletecart" value="Xóa toàn bộ">
       <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?');">Hủy</button>
     </form>
   </div>
+ 
+ 
 
 </body>
 </html>

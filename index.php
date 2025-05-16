@@ -65,7 +65,7 @@ else
 		</div>
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded ">
-				<a class="navbar-brand px-2" href="index.php"><img src="https://img.freepik.com/premium-vector/game-store-logo-template-design_316488-1493.jpg?w=2000" alt="" width=50px></a>
+				<a class="navbar-brand px-2" href="index.php"><img src="https://store.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="" width=100px></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynbar">
 					<span class="navbar-toggler-icon"></span>
 				</button>

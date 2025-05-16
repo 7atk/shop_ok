@@ -1,7 +1,6 @@
 <?php
 
-$connect = mysqli_connect('localhost','root','','admin123') or die("Không thể kết nối đến database");
-mysqli_set_charset($connect,"utf8");
+include('../configg.php');
 if(isset($_POST['email'])) {
     $email = $_POST['email'];
     $sql = "SELECT * FROM users WHERE email='$email'";

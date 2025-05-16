@@ -1,7 +1,6 @@
 <?php
 
-$connect = mysqli_connect('localhost', 'root', '', 'game_store') or die("Không thể kết nối đến database");
-mysqli_set_charset($connect, "utf8");
+include('configg.php');
 
 function generateOrderCode() {
     $prefix = "DH" . date("Ymd");

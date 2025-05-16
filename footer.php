@@ -38,13 +38,13 @@
   <footer class="footer pt-2" >
     <div class="container" style="background-color: #171a21;color: #c6d4df;">
       <div class="row align-items-center mb-4" >
-        <div class="col-md-2 text-center text-md-start mb-3 mb-md-0" style="padding-top: 20px;">
-          <img src="https://img.freepik.com/premium-vector/game-store-logo-template-design_316488-1493.jpg?w=2000" alt="Steam Logo" class="footer-logo">
+        <div class="col-md-2 text-center text-md-start mb-3 mb-md-0" style="padding-top: 10px; padding-left: 50px;">
+          <img src="https://store.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo" class="footer-logo">
         </div>
         <div class="col-md-7 text-center text-md-start">
           <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
             
-            <a href="#"class="nav-item nav-link"style="padding-left:20px">Giới thiệu</a>
+            <a href="#"class="nav-item nav-link"style="padding-left:250px">Giới thiệu</a>
             <a href="#"class="nav-item nav-link"style="padding-left:20px">Liên hệ</a>
             <a href="#"class="nav-item nav-link"style="padding-left:20px">Hỗ trợ</a>
             <a href="#"class="nav-item nav-link"style="padding-left:20px">Việc làm</a>

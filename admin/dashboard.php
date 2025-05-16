@@ -5,9 +5,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
     header("Location: http://localhost/shop_ok/index.php?page=login");
     exit();
 }
-// Kết nối CSDL bằng MySQLi
-$connect = mysqli_connect('localhost', 'root', '', 'game_store') or die("Không thể kết nối đến database");
-mysqli_set_charset($connect, "utf8");
+include('../configg.php');
 
 $view_mode = isset($_GET['view']) ? $_GET['view'] : 'month';
 
