@@ -58,7 +58,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   <div class="col-sm-2"><a href="http://localhost/shop_ok/index.php">🏠 Trang chủ</a></div>
   <div class="col-sm-2"><a href="#">📈 Doanh thu</a></div>
   <div class="col-sm-2"><a href="#">🛒 Đơn hàng</a></div>
-  <div class="col-sm-2"><a href="#">📦 Sản phẩm</a></div>
+  <div class="col-sm-2"><a href="http://localhost/shop_ok/index.php?page=list_sanpham">📦 Sản phẩm</a></div>
   <div class="col-sm-2"><a href="#">👤 Người dùng</a></div>
   <div class="col-sm-2"><a href="#">⚙️ Cài đặt</a></div>
 </div>

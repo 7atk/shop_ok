@@ -41,8 +41,9 @@ if (isset($_POST['checked'])) {
 
                 $sqlItem = "INSERT INTO order_items (order_id, product_id, quantity, price, subtotal,order_time)
                             VALUES ('$orderId', '$productId', '$quantity', '$price', '$totalPrice','$date')";
-                mysqli_query($connect, $sqlItem);
+               
             }
+             mysqli_query($connect, $sqlItem);
 
             // Xóa giỏ hàng sau khi đặt hàng thành công
             unset($_SESSION['cart']);

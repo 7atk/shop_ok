@@ -26,7 +26,7 @@ foreach ($result as $row) {
     $gianhap = number_format($price, 0);
     $giacu = number_format($price * 1.1, 0);
 ?>
-    <div class="col-md-6 col-lg-4">
+    <div class="col-md-6 col-lg-3">
         <div class="card-box">
             <div class="card-thumbnail">
                 <img class="img-fluid" src="<?php echo $hinhsp; ?>" alt="Hình ảnh sản phẩm" width="100%" height="100px" />

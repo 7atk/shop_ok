@@ -20,6 +20,7 @@ else
 
 	<link href="css/card-box.css" rel="stylesheet">
 	<link href="css/product-detail.css" rel="stylesheet">
+	
 </head>
 
 <body>
@@ -234,16 +235,12 @@ else
 		</div>
 	</main>
 	<footer class="footer pt-2">
-		<div class="container">
-			<div class="col-12 badge bg-secondary text-center">
-				<h6>Bản quyền được thiết kế © bởi: <a href="#"> GoDz </a> - Lớp: CD23CT02 </h6>
-				<h6>Thuộc Ngành học:<a href="#"> <b> CÔNG NGHỆ THÔNG TIN  </b> </a> - <script>
-						document.write(new Date().getFullYear());
-					</script>.</h6>
-				<h6> CAO ĐẲNG CÔNG NGHỆ THÀNH PHỐ HỒ CHÍ MINH </h6>
-
-			</div>
-		</div>
+	<?php 
+		include('footer.php');
+		?> 	
+	?>
+  </footer>
+</footer>
 	</footer>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
