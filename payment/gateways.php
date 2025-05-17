@@ -1,48 +1,57 @@
 <?php
+require_once '../libs/config.php'; 
 session_start();
-include('../configg.php');
 
-   
-    if(isset($_POST['accept'])){
-    $name = $_SESSION['cname'];
-    $phone = $_SESSION['cphone'];
-    $payment = $_SESSION['payment'];
-    
-    $address = $_SESSION['caddress'];
-    $email = $_SESSION['cemail'];
+
+if (isset($_POST['accept'])) {
+    $name = $_SESSION['cname'] ?? '';
+    $phone = $_SESSION['cphone'] ?? '';
+    $payment = $_SESSION['payment'] ?? '';
+    $address = $_SESSION['caddress'] ?? '';
+    $email = $_SESSION['cemail'] ?? '';
+    $orderId = $_SESSION['order_id'] ?? '';
     $date = date("Y-m-d H:i:s");
-    $orderId = $_SESSION['order_id'];
-        // Thêm vào bảng orders
-        $sql = "INSERT INTO orders ( customer_name, phone, address, email, payment_method, order_date)
-                VALUES ('$name', '$phone', '$address', '$email', '$payment', '$date')";
 
-        $result = mysqli_query($connect, $sql);
-        if ($result) {
-            foreach ($_SESSION['cart'] as $item) {
-                $productId = $item['id'];
-                $quantity = (int)$item['quantity'];
-                $price = (int)$item['price'];
-                $totalPrice = $quantity * $price;
+    try {
+        // Bắt đầu transaction
+        $conn->beginTransaction();
 
-                $sqlItem = "INSERT INTO order_items (order_id, product_id, quantity, price, subtotal,order_time)
-                            VALUES ('$orderId', '$productId', '$quantity', '$price', '$totalPrice','$date')";
-                mysqli_query($connect, $sqlItem);
-            }
+        // Thêm đơn hàng vào bảng `orders`
+        $sql = "INSERT INTO orders (customer_name, phone, address, email, payment_method, order_date)
+                VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$name, $phone, $address, $email, $payment, $date]);
 
-            // Xóa giỏ hàng sau khi đặt hàng thành công
-            unset($_SESSION['cart']);
-            unset($_SESSION['total']);
-            
-        echo "<script>alert('Đặt hàng thành công! Mã đơn hàng của bạn là: " . htmlspecialchars($orderId) . "');</script>";
-        echo "<script>window.location.href='../index.php';</script>"; 
-           
-            exit();
-        } else {
-            echo "Lỗi: " . mysqli_error($connect);
+        // Thêm từng sản phẩm vào `order_items`
+        $sqlItem = "INSERT INTO order_items (order_id, product_id, quantity, price, subtotal, order_time)
+                    VALUES (?, ?, ?, ?, ?, ?)";
+        $stmtItem = $conn->prepare($sqlItem);
+
+        foreach ($_SESSION['cart'] as $item) {
+            $productId = $item['id'];
+            $quantity = (int)$item['quantity'];
+            $price = (int)$item['price'];
+            $subtotal = $quantity * $price;
+
+            $stmtItem->execute([$orderId, $productId, $quantity, $price, $subtotal, $date]);
         }
+
+        $conn->commit();
+
+        // Xóa giỏ hàng
+        unset($_SESSION['cart']);
+        unset($_SESSION['total']);
+
+        echo "<script>alert('Đặt hàng thành công! Mã đơn hàng của bạn là: " . htmlspecialchars($orderId) . "');</script>";
+        echo "<script>window.location.href='../index.php';</script>";
+        exit();
+
+    } catch (PDOException $e) {
+        $pdo->rollBack();
+        echo "Lỗi xử lý đơn hàng: " . $e->getMessage();
     }
-   
-    ?>
+}
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>

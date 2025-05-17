@@ -70,7 +70,7 @@
       
       <div class="row">
         <div class="col-md-12 text-center">
-          <p>Chúng tôi cam kết bảo mật thông tin cá nhân của bạn. Đọc thêm về <a href="#">Chính sách bảo mật</a>.</p>
+          <p>Chúng tôi cam kết bảo mật thông tin cá nhân của bạn. Đọc thêm về <a href="https://help.divineshop.vn/gioi-thieu/chinh-sach-bao-mat">Chính sách bảo mật</a>.</p>
         </div>
       <div class="row">
         <div class="col-md-12 text-center">

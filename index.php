@@ -123,13 +123,29 @@ else
 								</span>
 						</a>
 					</div>
-					<form method="post" action="index.php?page=search" class="d-flex px-2"> <!-- px lert-right,ps left, pe là right -->
+					<!-- <form method="post" action="index.php?page=search" class="d-flex px-2">
 						<?php $data['search'] = isset($_POST['search']) ? $_POST['search'] : '';
 						$search = addslashes($data['search']); ?>
 						<input class="form-control me-2" type="search" name='search' placeholder="Search" 
 						value="<?php echo !empty($search) ? $search : ''; ?>">
 						<button class="btn btn-primary ">Search</button>
-					</form>
+					</form> -->
+					<form method="get" action="index.php" class="d-flex px-2">
+    
+                          <input type="hidden" name="page" value="search">
+
+                            <!-- <?php
+   
+                               $search = isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '';
+                             ?> -->
+
+                        <input class="form-control me-2" type="search" name="sanpham" placeholder="Search"
+                            	 value="<?php echo $search; ?>">
+
+                              <button class="btn btn-primary">Search</button>
+</form>
+
+					
 				</div>
 			</nav>
 		</div>

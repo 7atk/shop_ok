@@ -1,6 +1,5 @@
 <?php
-
-include('configg.php');
+require_once 'libs/config.php'; // Đảm bảo đã khởi tạo $pdo từ PDO
 
 function generateOrderCode() {
     $prefix = "DH" . date("Ymd");
@@ -13,63 +12,59 @@ if (isset($_POST['checked'])) {
     if (!empty($_SESSION['cart']) && !empty($_SESSION['total'])) {
         $cart = $_SESSION['cart'];
         $totalAmount = $_SESSION['total'];
-        $payment = mysqli_real_escape_string($connect, $_POST["payment"]);
-    if ($payment == "Cod") {
-        // Kiểm tra xem giỏ hàng có sản phẩm không
-       
-    // Lấy thông tin từ form
-        $name = mysqli_real_escape_string($connect, $_POST["name"]);
-        $phone = mysqli_real_escape_string($connect, $_POST["phone"]);
-        $address = mysqli_real_escape_string($connect, $_POST["address"]);
-        
-        $email = mysqli_real_escape_string($connect, $_POST["email"]);
-        $date = date("Y-m-d H:i:s");
-        $orderId = generateOrderCode();
-      
-        // Thêm vào bảng orders
-        $sql = "INSERT INTO orders ( customer_name, phone, address, email, payment_method, order_date)
-                VALUES ('$name', '$phone', '$address', '$email', '$payment', '$date')";
+        $payment = $_POST["payment"];
 
-        $result = mysqli_query($connect, $sql);
-        if ($result) {
-            foreach ($cart as $item) {
-                $productId = $item['id'];
-                $quantity = (int)$item['quantity'];
-                $price = (int)$item['price'];
-                $totalPrice = $quantity * $price;
+        if ($payment == "Cod") {
+            $name = $_POST["name"];
+            $phone = $_POST["phone"];
+            $address = $_POST["address"];
+            $email = $_POST["email"];
+            $date = date("Y-m-d H:i:s");
+            $orderId = generateOrderCode();
 
-                $sqlItem = "INSERT INTO order_items (order_id, product_id, quantity, price, subtotal,order_time)
-                            VALUES ('$orderId', '$productId', '$quantity', '$price', '$totalPrice','$date')";
-               
+            try {
+                // Bắt đầu transaction
+                $conn->beginTransaction();
+
+                // Insert vào bảng orders
+                $stmt = $conn->prepare("INSERT INTO orders (customer_name, phone, address, email, payment_method, order_date,order_id) VALUES (?, ?, ?, ?, ?, ?,?)");
+                $stmt->execute([$name, $phone, $address, $email, $payment, $date, $orderId]);
+
+                // Insert từng sản phẩm vào bảng order_items
+                $stmtItem = $conn->prepare("INSERT INTO order_items (order_id, product_id, quantity, price, subtotal, order_time) VALUES (?, ?, ?, ?, ?, ?)");
+                foreach ($cart as $item) {
+                    $productId = $item['id'];
+                    $quantity = (int)$item['quantity'];
+                    $price = (int)$item['price'];
+                    $subtotal = $quantity * $price;
+                    $stmtItem->execute([$orderId, $productId, $quantity, $price, $subtotal, $date]);
+                }
+
+                $conn->commit();
+
+                // Xóa giỏ hàng
+                unset($_SESSION['cart']);
+                unset($_SESSION['total']);
+                $success = true;
+            } catch (Exception $e) {
+                $pdo->rollBack();
+                echo "Lỗi: " . $e->getMessage();
             }
-             mysqli_query($connect, $sqlItem);
-
-            // Xóa giỏ hàng sau khi đặt hàng thành công
-            unset($_SESSION['cart']);
-            unset($_SESSION['total']);
-            $success = true;
-        } else {
-            echo "Lỗi: " . mysqli_error($connect);
-        }
-            
-        } 
-        elseif ($payment == "Onl") {
+        } elseif ($payment == "Onl") {
+            // Lưu vào session để xử lý online
             $_SESSION['cname'] = $_POST['name'];
             $_SESSION['cphone'] = $_POST['phone'];
             $_SESSION['cemail'] = $_POST['email'];
             $_SESSION['caddress'] = $_POST['address'];
             $_SESSION['order_id'] = generateOrderCode();
-            
             $_SESSION['payment'] = $payment;
+
             echo "<script>window.location.href='payment/gateways.php';</script>";
         }
-        
-    }
-    else {
+    } else {
         echo "<script>alert('Giỏ hàng trống! Vui lòng thêm sản phẩm vào giỏ hàng trước khi thanh toán.');</script>";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html>
