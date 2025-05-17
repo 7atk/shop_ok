@@ -6,7 +6,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
     exit();
 }
 
-require_once('../configg.php');
+require_once('../libs/config.php');
 
 // Lấy ID đơn hàng từ URL
 if (!isset($_GET['order_id'])) {
@@ -18,7 +18,7 @@ $order_id = $_GET['order_id'];
 // Lấy thông tin đơn hàng
 try {
     // 1. Thông tin đơn hàng
-    $stmtOrder = $pdo->prepare("SELECT * FROM orders WHERE id = ?");
+    $stmtOrder = $conn->prepare("SELECT * FROM orders WHERE id = ?");
     $stmtOrder->execute([$order_id]);
     $order = $stmtOrder->fetch();
 
@@ -27,7 +27,7 @@ try {
     }
 
     // 2. Chi tiết sản phẩm
-    $stmtItems = $pdo->prepare("
+    $stmtItems = $conn->prepare("
         SELECT oi.*, p.name AS product_name 
         FROM order_items oi
         JOIN products p ON oi.product_id = p.id

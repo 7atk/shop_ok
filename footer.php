@@ -44,10 +44,11 @@
         <div class="col-md-7 text-center text-md-start">
           <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
             
-            <a href="#"class="nav-item nav-link"style="padding-left:250px">Giới thiệu</a>
+            <a href="https://www.valvesoftware.com/en/about"class="nav-item nav-link"style="padding-left:200px">Giới thiệu</a>
             <a href="#"class="nav-item nav-link"style="padding-left:20px">Liên hệ</a>
-            <a href="#"class="nav-item nav-link"style="padding-left:20px">Hỗ trợ</a>
-            <a href="#"class="nav-item nav-link"style="padding-left:20px">Việc làm</a>
+            <a href="https://help.steampowered.com/vi/?snr=1_44_44_"class="nav-item nav-link"style="padding-left:20px">Hỗ trợ</a>
+            <a href="https://www.valvesoftware.com/en/"class="nav-item nav-link"style="padding-left:20px">Việc làm</a>
+            <a href="https://help.steampowered.com/vi/?snr=1_44_44_"class="nav-item nav-link"style="padding-left:20px">Hoàn tiền</a>
                                
           </div>
 

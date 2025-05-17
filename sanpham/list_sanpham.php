@@ -1,13 +1,29 @@
 <?php
+
 if(!isset($_SESSION['role'])&&$_SESSION['role']!=1){
     echo "<script>alert('Bạn không có quyền truy cập trang này!');</script>";{
         echo "<script>location.href='index.php';</script>"; 
     exit;
 }}
 else{
-$sql = "SELECT id, masp, tensp, hinhanh, gia FROM sanpham";
-$lists = SelectAll($sql);
-$STT=0;}
+    $limit = 6; // Số sản phẩm mỗi trang
+$page = isset($_GET['p']) ? (int)$_GET['p'] : 1;
+$page = max($page, 1);
+$start = ($page - 1) * $limit;
+
+// Tổng số bản ghi
+$stmt = $conn->query("SELECT COUNT(*) FROM sanpham");
+$totalRecords = $stmt->fetchColumn();
+$totalPages = ceil($totalRecords / $limit);
+
+// Lấy dữ liệu theo trang
+$stmt = $conn->prepare("SELECT id, masp, tensp, hinhanh, gia FROM sanpham LIMIT :start, :limit");
+$stmt->bindValue(':start', $start, PDO::PARAM_INT);
+$stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+$stmt->execute();
+$lists = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$STT = $start;
+}
 ?>
 
 <!-- HTML hiển thị -->
@@ -68,4 +84,27 @@ $STT=0;}
             </tbody>
         </table>
     </div>
+</div>
+<div class="mt-3">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <?php if ($page > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=list_sanpham&p=<?php echo $page - 1; ?>">Trước</a>
+                </li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?page=list_sanpham&p=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=list_sanpham&p=<?php echo $page + 1; ?>">Sau</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 </div>

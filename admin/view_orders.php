@@ -52,7 +52,7 @@ try {
                     <th>Địa chỉ</th>
                     <th>Thanh toán</th>
                     <th>Ngày đặt</th>
-                    <th>Mã đơn hàng</th>
+                    
                     <th>Tổng tiền</th>
                     <th>Chi tiết</th>
                 </tr>
@@ -68,7 +68,7 @@ try {
                             <td><?= htmlspecialchars($order['address']) ?></td>
                             <td><?= htmlspecialchars($order['payment_method']) ?></td>
                             <td><?= htmlspecialchars($order['order_date']) ?></td>
-                            <td><?= htmlspecialchars($order['order_id']) ?></td>
+                            
                             <td><?= number_format($order['total_amount'], 0, ',', '.') ?> VNĐ</td>
                             <td>
                                 <a href="order_details.php?order_id=<?= $order['order_id'] ?>" class="btn btn-sm btn-info">Xem</a>

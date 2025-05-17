@@ -45,12 +45,12 @@ if (!empty($_POST['ok'])) {
     if (empty($slnhap) || !is_numeric($slnhap)) $errors['slnhap'] = "<span style='color:red;'>Số lượng không hợp lệ</span>";
 
     if (!$errors) {
-        // Kiểm tra mã sản phẩm đã tồn tại chưa
+        
         // $sql_check = "SELECT * FROM sanpham WHERE masp = '$masp'";
         // $result_check = SelectAll($sql_check); // SelectAll() phải là hàm bạn đã định nghĩa để lấy dữ liệu từ database
         // if ($result_check > 0) {
         //    echo "<script>alert('Mã sản phẩm đã tồn tại');</script>";
-        //    echo "<script>location.href='index.php?page=add_sanpham';</script>";
+           
         // }
         // else {
             $sql_insert = "INSERT INTO sanpham (masp, tensp, idlsp,mota, hinhanh, gia, slnhap)
@@ -66,7 +66,7 @@ if (!empty($_POST['ok'])) {
         }
     
      }  
-        
+    // }
 
 ?>
 

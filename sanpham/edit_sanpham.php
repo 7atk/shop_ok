@@ -5,7 +5,7 @@ if(!isset($_GET['masp'])) {
     exit;
 }
 $idsp = $_GET['masp'] ;
-$sql = "SELECT masp, tensp, mota, hinhanh, gia,slnhap,slban FROM sanpham s   WHERE masp='$idsp'";
+$sql = "SELECT masp, tensp, mota, hinhanh, gia,slnhap FROM sanpham s   WHERE masp='$idsp'";
 $result = SelectAll($sql);
 foreach ($result as $row) {
     $idsp = $row['masp'] ?? '';  
@@ -15,8 +15,7 @@ foreach ($result as $row) {
     $thongtinsp = htmlspecialchars($row['mota'] ?? 'Đang cập nhật thông tin sản phẩm');  
     $gia = is_numeric($row['gia']) ? $row['gia'] : 0;
     $slnhap = htmlspecialchars($row['slnhap'] ?? '');
-    $slban = htmlspecialchars($row['slban'] ?? '');
-
+   
    
 }
 if (!empty($_POST['ok'])) {
@@ -44,7 +43,7 @@ if (!empty($_POST['ok'])) {
     $gia = trim($_POST['gia'] ?? '');
     $ttsp = trim($_POST['ttsp'] ?? '');
     $slnhap = trim($_POST['slnhap'] ?? '');
-    $slban = trim($_POST['slban'] ?? '');
+    
 
     if (empty($idsp)) $errors['idsp'] = "<span style='color:red;'>Chưa nhập mã sản phẩm</span>";
     if (empty($tensp)) $errors['tensp'] = "<span style='color:red;'>Chưa nhập tên sản phẩm</span>";
@@ -52,10 +51,10 @@ if (!empty($_POST['ok'])) {
     if (empty($idloai)) $errors['idloai'] = "<span style='color:red;'>Chưa chọn loại sản phẩm</span>";
     if (empty($ttsp)) $errors['ttsp'] = "<span style='color:red;'>Chưa nhập thông tin sản phẩm</span>";
     if (empty($slnhap) || !is_numeric($slnhap)) $errors['slnhap'] = "<span style='color:red;'>Số lượng không hợp lệ</span>";
-    if (empty($slban) || !is_numeric($slban)) $errors['slban'] = "<span style='color:red;'>Số lượng không hợp lệ</span>";
+    
 
     if (!$errors) {
-        $sql_update = "UPDATE sanpham SET  masp  ='$idloai', tensp='$tensp', hinhanh='$tenfile', mota='$ttsp', gia='$gia',slnhap='$slnhap',slban='$slban' WHERE IDSP='$idsp'";
+        $sql_update = "UPDATE sanpham SET  idlsp  ='$idloai', tensp='$tensp', hinhanh='$tenfile', mota='$ttsp', gia='$gia',slnhap='$slnhap' WHERE masp='$idsp'";
                        
         $id = Execute($sql_update); // Execute() phải là hàm bạn đã định nghĩa để thực thi câu SQL
 
@@ -68,55 +67,6 @@ if (!empty($_POST['ok'])) {
 }   
     
 
-
-
-
-// $errors = [];
-// $tenfile = '';
-// $data = [];
-
-// if (!empty($_POST['ok'])) {
-//     $path = 'images/';
-//     if (isset($_FILES['infile']) && $_FILES['infile']['error'] == 0) {
-//         $fileTmp = $_FILES['infile']['tmp_name'];
-//         $fileName = basename($_FILES['infile']['name']);
-//         $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-//         $allowed = ['jpg', 'jpeg', 'png', 'gif'];
-
-//         if (in_array($fileExt, $allowed)) {
-//             $tenfile = uniqid('img_') . '.' . $fileExt;
-//             move_uploaded_file($fileTmp, $path . $tenfile);
-//         } else {
-//             $errors['file'] = "<span style='color:red;'>File không hợp lệ. Chỉ chấp nhận JPG, PNG, GIF.</span>";
-//         }
-//     } else {
-//         $errors['file'] = "<span style='color:red;'>Chưa chọn hình</span>";
-//     }
-
-//     // Lấy dữ liệu từ POST
-//     $idsp = trim($_POST['idsp'] ?? '');
-//     $tensp = trim($_POST['tensp'] ?? '');
-//     $idloai = trim($_POST['idloai'] ?? '');
-//     $gia = trim($_POST['gia'] ?? '');
-//     $ttsp = trim($_POST['ttsp'] ?? '');
-
-//     if (empty($idsp)) $errors['idsp'] = "<span style='color:red;'>Chưa nhập mã sản phẩm</span>";
-//     if (empty($tensp)) $errors['tensp'] = "<span style='color:red;'>Chưa nhập tên sản phẩm</span>";
-//     if (empty($gia) || !is_numeric($gia)) $errors['gia'] = "<span style='color:red;'>Giá không hợp lệ</span>";
-//     if (empty($idloai)) $errors['idloai'] = "<span style='color:red;'>Chưa chọn loại sản phẩm</span>";
-
-//     if (!$errors) {
-//         $sql_insert = "INSERT INTO san_pham (IDSP, IDLSP, TENSP, HINHSP, THONGTINSP, gia)
-//                        VALUES ('$idsp', '$idloai', '$tensp', '$tenfile', '$ttsp', '$gia')";
-//         $id = Execute($sql_insert); // Execute() phải là hàm bạn đã định nghĩa để thực thi câu SQL
-
-//         if ($id > 0) {
-//             echo "<script>alert('Thêm thành công'); location.href='index.php?page=list_sanpham';</script>";
-//         } else {
-//             echo "<div class='text-danger'>Thêm sản phẩm không thành công</div>";
-//         }
-//     }
-// }
 // ?>
 
 <div class="container">
@@ -208,16 +158,7 @@ if (!empty($_POST['ok'])) {
                         <?php endif; ?>
                     </td>
                 </tr>
-                <tr>
-                    <td>sl sold:</td>
-                    <td>
-                        <input name="slban" type="text" required id="slnban" class="form-control"
-                               value="<?= htmlspecialchars($slban ?? '') ?>" />
-                        <?php if (!empty($errors['slban'])): ?>
-                            <div class="text-danger"><?= $errors['slban'] ?></div>
-                        <?php endif; ?>
-                    </td>
-                </tr>
+              
 
                 <tr>
                     <td></td>
