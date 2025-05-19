@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 // Kiểm tra quyền truy cập
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
@@ -10,6 +10,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
 require_once('../libs/config.php'); // File này phải thiết lập kết nối PDO trong biến $pdo
 
 $view_mode = isset($_GET['view']) ? $_GET['view'] : 'month';
+$Session['view'] = $view_mode;
 
 if ($view_mode === 'year') {
     $sql = "SELECT DATE_FORMAT(order_time, '%Y') AS period, SUM(subtotal) AS revenue
@@ -49,70 +50,22 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-light">
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Admin Dashboard</a>
-    </div>
-</nav>
-<nav class="navbar navbar-expand-sm bg-success navbar-dark">
-     <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
- </nav>
-
-
-<div class="container-fluid mt-1">
- <div class="row">
-    <div class="col-sm-1 bg-info text-white rounded ">
-      <h5 >Menu</h5>
-         <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-      <hr class="d-sm-none">
-    </div>
-    <div class="col-sm-8">
-            <div class="card shadow">
-               
-            <?php include('m_chart.php'); ?>
-            
-        </div>
-        </div>
-      
-     <div class="col-sm-3">
-        <?php include('top_product.php'); ?>
-    </div>
-    <div class="col-sm-12">
-        <?php include('view_orders.php'); ?>    
-</div>
-</div>
-
-<!-- <script>
+<body>
+   <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Biểu đồ doanh thu</h5>
+                    <form method="get" class="d-flex">
+                        <select name="view" class="form-select form-select-sm me-2" onchange="this.form.submit()">
+                            <option value="month" <?= $view_mode === 'month' ? 'selected' : '' ?>>Theo tháng</option>
+                            <option value="year" <?= $view_mode === 'year' ? 'selected' : '' ?>>Theo năm</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <canvas id="revenueChart" height="100"></canvas>
+                </div>
+            </div>
+            <script>
     const labels = <?= json_encode($labels); ?>;
     const revenues = <?= json_encode($revenues); ?>;
 
@@ -144,7 +97,6 @@ try {
             }
         }
     });
-</script> -->
-
+</script>
 </body>
 </html>

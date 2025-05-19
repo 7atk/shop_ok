@@ -6,6 +6,7 @@ $limit = 8;
 $page = isset($_GET['p']) ? max((int)$_GET['p'], 1) : 1;
 $offset = ($page - 1) * $limit;
 
+
 // --- Tạo điều kiện lọc ---
 $where = '';
 $params = [];
@@ -54,6 +55,7 @@ foreach ($result as $row) {
     $price = is_numeric($row['gia']) ? $row['gia'] : 0;
     $gianhap = number_format($price, 0);
     $giacu = number_format($price * 1.1, 0);
+   
 ?>
     <div class="col-md-6 col-lg-3">
         <div class="card-box">
@@ -67,7 +69,7 @@ foreach ($result as $row) {
                         <?php echo $tensp; ?>
                     </a>
                 </h3>
-                <strong class="text-light badge bg-dark"><?php echo $tenlsp; ?></strong><br>
+                <strong class="badge bg-success"><?php echo $tenlsp; ?></strong><br>
                 <!-- <p class="text-secondary"><?php echo $thongtinsp; ?></p> -->
                 <small class="text-muted">Giá cũ: <s><span><?php echo $giacu; ?> vnd</span></s></small>
                 <h6 class="price">Giá hiện tại: <span><?php echo $gianhap; ?> vnd</span></h6>
@@ -108,7 +110,6 @@ for ($i = 1; $i <= $total_pages; $i++) {
 
 echo '</ul></nav></div>';
 ?>
-
 
 
 

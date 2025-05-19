@@ -46,13 +46,14 @@ if (!empty($_POST['ok'])) {
 
     if (!$errors) {
         
-        // $sql_check = "SELECT * FROM sanpham WHERE masp = '$masp'";
-        // $result_check = SelectAll($sql_check); // SelectAll() phải là hàm bạn đã định nghĩa để lấy dữ liệu từ database
-        // if ($result_check > 0) {
-        //    echo "<script>alert('Mã sản phẩm đã tồn tại');</script>";
-           
-        // }
-        // else {
+             $stmt = $conn->prepare("SELECT * FROM sanpham WHERE masp = :masp");
+             $stmt->execute(['masp' => $masp]);
+             $result_check = $stmt->fetchAll();
+
+              if ($result_check) {
+                echo "<script>alert('Mã sản phẩm đã tồn tại');</script>";
+                  }
+        else {
             $sql_insert = "INSERT INTO sanpham (masp, tensp, idlsp,mota, hinhanh, gia, slnhap)
             VALUES ('$masp','$tensp' ,'$idloai', '$ttsp','$tenfile' , '$gia','$slnhap')";
              $id = Execute($sql_insert); // Execute() phải là hàm bạn đã định nghĩa để thực thi câu SQL
@@ -64,7 +65,7 @@ if (!empty($_POST['ok'])) {
 }
 }
         }
-    
+}
      }  
     // }
 

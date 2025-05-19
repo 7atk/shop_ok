@@ -25,7 +25,7 @@ else
 
 <body>
 	<header>
-		<div class="container">
+		<div class="container ">
 			<div class="row">
 				<div class="col-12">
 					<!-- Carousel -->
@@ -242,7 +242,7 @@ else
 		}
 		?>
 		<div class="container">
-			<div class="col-12 badge bg-secondary text-start mb-1">
+			<div class="col-12 badge bg-secondary text-start ">
 				<h5 class="text-white pt-2"> <?php echo $title; ?> </h5>
 			</div>
 			<div class="row">
@@ -250,7 +250,7 @@ else
 			</div>
 		</div>
 	</main>
-	<footer class="footer pt-2">
+	<footer class="footer pt-1">
 	<?php 
 		include('footer.php');
 		?> 	

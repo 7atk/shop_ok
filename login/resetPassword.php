@@ -1,11 +1,11 @@
 <?php
 
-include('../configg.php');
+// include('../common.php');
 if(isset($_POST['email'])) {
     $email = $_POST['email'];
     $sql = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($connect, $sql);
-    if (mysqli_num_rows($result) > 0) {
+    $result = selectAll($sql);
+    if (count($result) > 0) {
         // // Generate a unique token for password reset
         // $token = bin2hex(random_bytes(50));
         // $sql = "UPDATE users SET token='$token' WHERE email='$email'";

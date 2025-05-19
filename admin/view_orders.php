@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 // Chỉ cho phép admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {

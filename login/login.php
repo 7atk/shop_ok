@@ -42,10 +42,10 @@ if (isset($_POST['dangnhap'])) {
 }
 disconnect_db();
 ?>
-<div class="container text-bg-info">
-  <div class="row justify-content-md-center">
-    <div class="col-5">
-      <div class="bg-white p-4 rounded shadow-sm">
+<div class="container  bg_img rounded-3" style="width: 135vh; height: 48vh;">
+  <div class="row justify-content-md-center" style="padding: 50px;">
+    <div class="col-4" style="padding: 20px;">
+      <div class="bg-wrap">
         <form method="post" action="#!">
           <div class="container text-danger text-center fst-italic"><?php echo !empty($msg) ? $msg : '';  ?></div>
           <div class="row gy-3 gy-md-4 overflow-hidden">
@@ -53,9 +53,9 @@ disconnect_db();
               <!-- <label for="txtuser" class="form-label">Username <span class="text-danger">*</span></label> -->
                <h6 class="text-left text-dark">Username:</h6>
               <div class="input-group">
-                <span class="input-group-text">
+                <!-- <span class="input-group-text">
                   <span class="input-group-text">@</span>
-                </span>
+                </span> -->
                 <input type="text" class="form-control" name="txtuser" id="txtuser" value=""  required>
               </div>
             </div>
@@ -63,11 +63,11 @@ disconnect_db();
             <h6 class="text-left text-dark">Password:</h6>
               <!-- <label for="password" class="form-label">Password <span class="text-danger">*</span></label> -->
               <div class="input-group">
-                <span class="input-group-text">
+                <!-- <span class="input-group-text">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key" viewBox="0 0 16 16">
                     <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z" />
                     <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                  </svg>
+                  </svg> -->
                 </span>
                 
                 <input type="password" class="form-control" name="txtpwd" id="password" value="" required>
@@ -80,12 +80,12 @@ disconnect_db();
             </div>
           </div>
         </form>
-        <div class="row">
-          <div class="col-12">
+        <div class="row" >
+          <div class="col-12 " >
             <hr class="mt-2 mb-2 border-secondary-subtle">
-            <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center">
-              <a href="index.php?page=resgister" class="link-secondary text-decoration-none">Create new account</a>
-              <a href="index.php?page=resetPassword" class="link-secondary text-decoration-none">Forgot password</a>
+            <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center ">
+              <a href="index.php?page=register" class="link-warning text-decoration-none">Create new account</a>
+              <a href="index.php?page=resetPassword" class="link-warning text-decoration-none">Forgot password</a>
             </div>
             
           </div>
@@ -101,3 +101,20 @@ disconnect_db();
     </div>
   </div>
 </div>
+
+
+<style>
+.bg-wrap {
+  background: rgba(255, 255, 255, 0.4); /* nền trắng mờ */
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px); /* làm mờ background phía sau */
+  -webkit-backdrop-filter: blur(5px); /* hỗ trợ Safari */
+
+}
+.bg_img {
+  background: url('https://wallpapercave.com/wp/wp8137708.png') no-repeat center center fixed;
+
+}
+</style>
+
