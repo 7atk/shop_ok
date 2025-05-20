@@ -2,12 +2,12 @@
 
 
 // --- Cấu hình phân trang ---
-$limit = 8;
+$limit = 12;
 $page = isset($_GET['p']) ? max((int)$_GET['p'], 1) : 1;
 $offset = ($page - 1) * $limit;
 
 
-// --- Tạo điều kiện lọc ---
+// --- Tạo điều kiện lọc ---    
 $where = '';
 $params = [];
 
@@ -57,7 +57,7 @@ foreach ($result as $row) {
     $giacu = number_format($price * 1.1, 0);
    
 ?>
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-2">
         <div class="card-box">
             <div class="card-thumbnail">
                 <img class="img-fluid" src="<?php echo $hinhsp; ?>" alt="Hình ảnh sản phẩm" width="100%" height="100px" />

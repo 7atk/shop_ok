@@ -12,7 +12,7 @@
 
 <div class="container mt-3">
   <h2>Giỏ hàng của bạn</h2>
-  <p>Danh sách sản phẩm trong giỏ hàng:<a href="index.php">Muốn đặt thêm hàng ?</a></p>
+  
   <?php 
   if (!isset($_SESSION['username'])) {
     echo "<div class='alert alert-danger'>Bạn cần đăng nhập để xem giỏ hàng.</div>";
@@ -23,6 +23,7 @@
   ?>
 
   <?php if (!empty($_SESSION['cart'])): ?>
+    <p>Danh sách sản phẩm trong giỏ hàng:<a href="index.php">Muốn đặt thêm hàng ?</a></p>
     <form method="post" action="index.php?page=delete_cart">
       <input class="btn btn-warning mb-2 float-end" type="submit" name="deletecart" value="Xóa toàn bộ" onclick="return confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?');" />
     </form>

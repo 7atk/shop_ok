@@ -241,7 +241,7 @@ else
 			echo "</br>" . $e->getMessage();
 		}
 		?>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="col-12 badge bg-secondary text-start  ">
 				<h5 class="text-white pt-2"> <?php echo $title; ?> </h5>
 			</div>

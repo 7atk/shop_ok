@@ -37,6 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!-- HTML Form -->
+ <div class="container  bg_img rounded-3" style="max-width:98.5%; height: 48vh;">
+  <div class="row justify-content-md-center" style="padding: 50px;">
+    <div class="col-4" style="padding: 20px;">
+      <div class="bg-wrap">
 <form method="POST" action="">
     <!-- <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
@@ -49,3 +53,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <br>
     <button type="submit" name="submit">Update Password</button>
 </form>
+</div>
+</div>
+</div>
+</div>
+<style>
+.bg-wrap {
+  background: rgba(255, 255, 255, 0.4); /* nền trắng mờ */
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px); /* làm mờ background phía sau */
+  -webkit-backdrop-filter: blur(5px); /* hỗ trợ Safari */
+
+}
+.bg_img {
+  background: url('https://wallpapercave.com/wp/wp8137708.png') no-repeat center center fixed;
+
+}
+</style>

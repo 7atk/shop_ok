@@ -162,51 +162,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script> 
-<!-- <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const labels = <?= json_encode($labels) ?>;
-    const values = <?= json_encode($values) ?>;
-    const total = <?= $total ?>;
-
-    const percentageData = values.map(val => ((val / total) * 100).toFixed(2));
-
-    const ctx = document.getElementById('pieChart');
-  
-
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: labels.map((label, i) => `${label} (${percentageData[i]}%)`),
-            datasets: [{
-                data: values,
-                backgroundColor: [
-                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'
-                ]
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }
-    });
-});
-</script> -->
 
 </div>
+
     </div>
-  
-   
 
-    
-
-    
-
-
-</body>
+    </body>
 </html>
 
 <style>

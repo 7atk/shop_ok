@@ -19,8 +19,8 @@ $labels = [];
 $values = [];
 $total = 0;
 foreach ($data as $row) {
-    $labels[] = $row['product_name'];
-    $values[] = $row['total_quantity'];
+    $labelsss[] = $row['product_name'];
+    $valuesss[] = $row['total_quantity'];
     $total += $row['total_quantity'];
 }
 ?>
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: <?php echo json_encode($labels); ?>,
+            labels: <?php echo json_encode($labelsss); ?>,
             datasets: [{
                 label: "Sản phẩm",
                 data: <?php echo json_encode($data); ?>,
@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
     <canvas id="pieChart" width="10" height="10"></canvas>
 
     <script>
-        const labels = <?= json_encode($labels) ?>;
-        const values = <?= json_encode($values) ?>;
+        const labels = <?= json_encode($labelsss) ?>;
+        const values = <?= json_encode($valuesss) ?>;
         const total = <?= $total ?>;
 
         const percentageData = values.map(val => ((val / total) * 100).toFixed(2));
