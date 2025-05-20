@@ -47,7 +47,7 @@ if (isset($_POST['checked'])) {
                 unset($_SESSION['total']);
                 $success = true;
             } catch (Exception $e) {
-                $pdo->rollBack();
+                $conn->rollBack();
                 echo "Lỗi: " . $e->getMessage();
             }
         } elseif ($payment == "Onl") {

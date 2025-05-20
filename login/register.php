@@ -60,8 +60,12 @@
 
 	?>
 
-<div class="container mt-3">
-  <h2>Stacked form</h2>
+
+  <div class="container  bg_img rounded-3" style="max-width:98.5%; height: 48vh;">
+  <div class="row justify-content-md-center" >
+    <div class="col-4" >
+      <div class="bg-wrap h">
+  <h2>Stacked form</h2> 
   <form action="" method="post">
     <div class="mb-3 mt-3">
       <label for="Username">Username:</label>
@@ -84,9 +88,29 @@
         <input class="form-check-input" type="checkbox" name="remember"> Remember me
       </label>
     </div>
-    <button type="submit" class="btn btn-primary" name="dangky">Submit</button>
+    <button  type="submit" class="btn btn-primary " name="dangky">Submit</button>
   </form>
 </div>
-
+</div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
+<style>
+.bg-wrap {
+  background: rgba(255, 255, 255, 0.4); /* nền trắng mờ */
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px); /* làm mờ background phía sau */
+  -webkit-backdrop-filter: blur(5px); /* hỗ trợ Safari */
+ height: 48vh;
+  width: 100%;
+  margin: auto;
+}
+.bg_img {
+  background: url('https://wallpapercave.com/wp/wp8137708.png') no-repeat center center fixed;
+
+}
+
+</style>

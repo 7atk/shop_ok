@@ -56,12 +56,13 @@ if (isset($_POST['accept'])) {
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Form với QR và 2 nút</title>
+  <title>QR check out</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 50px;
+      background-image: url("https://wallpaperaccess.com/full/8066610.png");
     }
     .qr-code {
       width: 200px;
@@ -102,9 +103,9 @@ if (isset($_POST['accept'])) {
 <body>
 
   <h2>Quét mã QR để tiếp tục</h2>
-
+<div class="bg-info" >
   <!-- Hình ảnh QR -->
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://example.com" alt="QR Code" class="qr-code">
+  <img src="../images/Capture.PNG" style="height:30vh;width:30vh" alt="QR Code" class="qr-code">
 
   <!-- Hai nút -->
   <div class="buttons">
@@ -118,6 +119,8 @@ if (isset($_POST['accept'])) {
     </form>
   </div>
  
+</div>
+
  
 
 </body>

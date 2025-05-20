@@ -9,35 +9,35 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
 
 require_once('../libs/config.php'); // File này phải thiết lập kết nối PDO trong biến $pdo
 
-$view_mode = isset($_GET['view']) ? $_GET['view'] : 'month';
 
-if ($view_mode === 'year') {
-    $sql = "SELECT DATE_FORMAT(order_time, '%Y') AS period, SUM(subtotal) AS revenue
-            FROM order_items
-            GROUP BY period
-            ORDER BY period ASC";
-} else {
-    $sql = "SELECT DATE_FORMAT(order_time, '%Y-%m') AS period, SUM(subtotal) AS revenue
-            FROM order_items
-            GROUP BY period
-            ORDER BY period ASC";
-}
+// }
 
-try {
-    $stmt = $conn->query($sql);
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $labels = [];
-    $revenues = [];
 
-    foreach ($results as $row) {
-        $labels[] = $row['period'];
-        $revenues[] = $row['revenue'];
-    }
-} catch (PDOException $e) {
-    die("Lỗi truy vấn dữ liệu: " . $e->getMessage());
+$sql = "SELECT 
+            oi.product_id, 
+            s.tensp AS product_name, 
+            SUM(oi.quantity) AS total_quantity
+        FROM order_items oi
+        JOIN sanpham s ON oi.product_id = s.masp
+        GROUP BY oi.product_id";
+
+$stmt = $conn->query($sql);
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Tách dữ liệu cho biểu đồ
+$labelss = [];
+$values = [];
+$total = 0;
+
+foreach ($data as $row) {
+    $labelss[] = $row['product_name'];
+    $valuess[] = (int)$row['total_quantity'];
+    // $totals += (int)$row['total_quantity'];
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -48,6 +48,18 @@ try {
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 600px;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
 </head>
 <body class="bg-light">
 
@@ -56,7 +68,7 @@ try {
         <a class="navbar-brand" href="#">Admin Dashboard</a>
     </div>
 </nav>
-<nav class="navbar navbar-expand-sm bg-success navbar-dark">
+<!-- <nav class="navbar navbar-expand-sm bg-success navbar-dark">
      <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -73,22 +85,22 @@ try {
       </li>
     </ul>
   </div>
- </nav>
+ </nav> -->
 
 
 <div class="container-fluid mt-1">
  <div class="row">
-    <div class="col-sm-1 bg-info text-white rounded ">
+    <div class="col-sm-1 bg-info text-white  ">
       <h5 >Menu</h5>
          <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
+          <a class="nav-link active" href="../index.php">Trang chủ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link active" href="../user/list_user.php">User</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link active" href="../index.php?page=list_sanpham">Ql Sản phẩm</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
@@ -101,50 +113,106 @@ try {
                
             <?php include('m_chart.php'); ?>
             
-        </div>
-        </div>
+             </div>
+      </div>
       
      <div class="col-sm-3">
-        <?php include('top_product.php'); ?>
-    </div>
-    <div class="col-sm-12">
-        <?php include('view_orders.php'); ?>    
-</div>
-</div>
+      <div class="card shadow" style="width: 100%;height: 100%;">
+         
+        <h2 style="text-align:center;">Biểu đồ tỉ lệ sản phẩm đã bán</h2>
 
-<!-- <script>
-    const labels = <?= json_encode($labels); ?>;
-    const revenues = <?= json_encode($revenues); ?>;
 
-    const ctx = document.getElementById('revenueChart').getContext('2d');
+         <canvas id="productPieChart" width="10" height="10"></canvas>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('productPieChart');
+
     new Chart(ctx, {
-        type: 'line',
+        type: 'pie',
         data: {
-            labels: labels,
+            labels: <?php echo json_encode($labelss); ?>,
             datasets: [{
-                label: 'Doanh thu (VNĐ)',
-                data: revenues,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-                tension: 0.4
+                data: <?php echo json_encode($valuess); ?>,
+                backgroundColor: [
+                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
+                    '#9966FF', '#FF9F40', '#E7E9ED', '#8AFFC1',
+                    '#C0FF33', '#FF33C4', '#339FFF'
+                ]
             }]
         },
         options: {
             responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return new Intl.NumberFormat('vi-VN').format(value) + ' ₫';
+            plugins: {
+                legend: {
+                    position: 'right'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.parsed;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percent = ((value / total) * 100).toFixed(2);
+                            return `${context.label}: ${value} (${percent}%)`;
                         }
                     }
                 }
             }
         }
     });
+});
+</script> 
+<!-- <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const labels = <?= json_encode($labels) ?>;
+    const values = <?= json_encode($values) ?>;
+    const total = <?= $total ?>;
+
+    const percentageData = values.map(val => ((val / total) * 100).toFixed(2));
+
+    const ctx = document.getElementById('pieChart');
+  
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels.map((label, i) => `${label} (${percentageData[i]}%)`),
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+});
 </script> -->
+
+</div>
+    </div>
+  
+   
+
+    
+
+    
+
 
 </body>
 </html>
+
+<style>
+    #pieChart {
+        max-width: 200px;
+        max-height: 200px;
+        
+    }
+</style>

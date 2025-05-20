@@ -42,7 +42,7 @@ if (isset($_POST['dangnhap'])) {
 }
 disconnect_db();
 ?>
-<div class="container  bg_img rounded-3" style="width: 135vh; height: 48vh;">
+<div class="container  bg_img rounded-3" style="max-width:98.5%; height: 48vh;">
   <div class="row justify-content-md-center" style="padding: 50px;">
     <div class="col-4" style="padding: 20px;">
       <div class="bg-wrap">

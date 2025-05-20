@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 17, 2025 lúc 12:47 PM
+-- Thời gian đã tạo: Th5 20, 2025 lúc 05:54 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.0.30
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -68,8 +68,18 @@ CREATE TABLE `orders` (
   `address` text DEFAULT NULL,
   `payment_method` varchar(50) DEFAULT NULL,
   `order_date` datetime DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
+  `email` varchar(50) DEFAULT NULL,
+  `order_id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_name`, `phone`, `address`, `payment_method`, `order_date`, `email`, `order_id`) VALUES
+(8, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-05-19 23:21:39', 'quangtran@gmail.com', 'DH20250519UDI801'),
+(10, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-05-19 23:32:12', 'quangtran@gmail.com', 'DH20250519HMK267'),
+(11, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-05-19 23:32:29', 'quangtran@gmail.com', 'DH20250519RFW341');
 
 -- --------------------------------------------------------
 
@@ -86,6 +96,17 @@ CREATE TABLE `order_items` (
   `id` int(11) NOT NULL,
   `order_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_items`
+--
+
+INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`, `price`, `subtotal`, `id`, `order_time`) VALUES
+('DH20250519UDI801', 'A2', 10, 900000, 9000000, 11, '2025-05-19 23:21:39'),
+('DH20250519HMK267', 'A3', 10, 800000, 8000000, 14, '2025-05-19 23:32:12'),
+('DH20250519HMK267', 'A4', 10, 250000, 2500000, 15, '2025-05-19 23:32:12'),
+('DH20250519RFW341', 'A2', 10, 900000, 9000000, 16, '2025-05-19 23:32:29'),
+('DH20250519RFW341', 'A3', 10, 800000, 8000000, 17, '2025-05-19 23:32:29');
 
 -- --------------------------------------------------------
 
@@ -236,8 +257,7 @@ ALTER TABLE `orders`
 -- Chỉ mục cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `order_id` (`order_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `roles`
@@ -279,13 +299,13 @@ ALTER TABLE `loai_sp`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`

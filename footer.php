@@ -36,7 +36,7 @@
 <body>
 
   <footer class="footer " >
-    <div class="container" style="background-color: #171a21;color: #c6d4df;width: 135vh;position: relative">
+    <div class="container-fluid" style="background-color: #171a21;color: #c6d4df;">
       <div class="row align-items-center mb-4" >
         <div class="col-md-2 text-center text-md-start mb-3 mb-md-0" style="padding-top: 10px; padding-left: 50px;">
           <img src="https://store.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo" class="footer-logo">

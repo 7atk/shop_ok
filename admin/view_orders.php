@@ -33,7 +33,7 @@ try {
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-1 rounded">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Admin - Đơn hàng</a>
     </div>
