@@ -11,29 +11,34 @@ require_once('../libs/config.php'); // File này phải thiết lập kết nố
 
 
 // }
+$years = $conn->query("SELECT DISTINCT YEAR(order_time) as year FROM order_items ORDER BY year DESC")->fetchAll(PDO::FETCH_COLUMN);
 
+// Mặc định tháng/năm hiện tại nếu không chọn
+$selectedMonth = isset($_GET['month']) ? (int)$_GET['month'] : date('m');
+$selectedYear = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 
-
+// Lấy dữ liệu sản phẩm bán theo tháng/năm đã chọn
 $sql = "SELECT 
-            oi.product_id, 
-            s.tensp AS product_name, 
+            oi.product_id,
+            s.tensp AS product_name,
             SUM(oi.quantity) AS total_quantity
         FROM order_items oi
         JOIN sanpham s ON oi.product_id = s.masp
+        WHERE MONTH(oi.order_time) = :month AND YEAR(oi.order_time) = :year
         GROUP BY oi.product_id";
 
-$stmt = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->execute(['month' => $selectedMonth, 'year' => $selectedYear]);
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Tách dữ liệu cho biểu đồ
 $labelss = [];
 $values = [];
 $total = 0;
 
 foreach ($data as $row) {
     $labelss[] = $row['product_name'];
-    $valuess[] = (int)$row['total_quantity'];
-    // $totals += (int)$row['total_quantity'];
+    $values[] = (int)$row['total_quantity'];
+    $total += (int)$row['total_quantity'];
 }
 ?>
 
@@ -67,30 +72,28 @@ foreach ($data as $row) {
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Admin Dashboard</a>
     </div>
+    
+					 
+					<form method="get" action="search_order.php" class="d-flex px-2">
+    
+                          <input type="hidden" name="page" value="search">
+
+                            <!-- <?php
+   
+                               $search = isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '';
+                             ?> -->
+
+                        <input class="form-control me-2" type="search" name="tenkh" placeholder="Search"
+                            	 value="<?php echo $search; ?>">
+
+                              <button class="btn btn-warning">Search</button>
+</form>
 </nav>
-<!-- <nav class="navbar navbar-expand-sm bg-success navbar-dark">
-     <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
- </nav> -->
 
 
 <div class="container-fluid mt-1">
  <div class="row">
-    <div class="col-sm-1 bg-info text-white  ">
+    <div class="col-sm-1 bg-info text-white rounded"> 
       <h5 >Menu</h5>
          <ul class="nav nav-pills flex-column">
         <li class="nav-item">
@@ -118,26 +121,52 @@ foreach ($data as $row) {
       
      <div class="col-sm-3">
       <div class="card shadow" style="width: 100%;height: 100%;">
-         
-        <h2 style="text-align:center;">Biểu đồ tỉ lệ sản phẩm đã bán</h2>
+         <h2 style="text-align:center;">Thống kê tỉ lệ sản phẩm đã bán</h2>
 
+<form method="get" action="">
+    <label>Chọn tháng: 
+        <select name="month">
+            <?php for ($m = 1; $m <= 12; $m++): ?>
+                <option value="<?= $m ?>" <?= $m == $selectedMonth ? 'selected' : '' ?>><?= $m ?></option>
+            <?php endfor; ?>
+        </select>
+    </label>
 
-         <canvas id="productPieChart" width="10" height="10"></canvas>
+    <label>Chọn năm: 
+        <select name="year">
+            <?php foreach ($years as $y): ?>
+                <option value="<?= $y ?>" <?= $y == $selectedYear ? 'selected' : '' ?>><?= $y ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label>
+
+    <button type="submit">Xem</button>
+</form>
+
+<div class="chart-container">
+    <canvas id="pieChart"></canvas>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const ctx = document.getElementById('productPieChart');
+    const labels = <?= json_encode($labelss) ?>;
+    const values = <?= json_encode($values) ?>;
+    const total = <?= $total ?>;
+
+    const percentageData = values.map(val => ((val / total) * 100).toFixed(2));
+    const ctx = document.getElementById('pieChart');
+
+    if (!ctx) return;
 
     new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: <?php echo json_encode($labelss); ?>,
+            labels: labels.map((label, i) => `${label} (${percentageData[i]}%)`),
             datasets: [{
-                data: <?php echo json_encode($valuess); ?>,
+                data: values,
                 backgroundColor: [
                     '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
-                    '#9966FF', '#FF9F40', '#E7E9ED', '#8AFFC1',
-                    '#C0FF33', '#FF33C4', '#339FFF'
+                    '#9966FF', '#FF9F40', '#E7E9ED', '#8AFFC1'
                 ]
             }]
         },
@@ -145,35 +174,32 @@ document.addEventListener("DOMContentLoaded", function () {
             responsive: true,
             plugins: {
                 legend: {
-                    position: 'right'
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.parsed;
-                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                            const percent = ((value / total) * 100).toFixed(2);
-                            return `${context.label}: ${value} (${percent}%)`;
-                        }
-                    }
+                    position: 'bottom'
                 }
             }
         }
     });
 });
-</script> 
+</script>
 
-</div>
-
+        </div>
+        
     </div>
+<div class="col-12">
+        <div class="card shadow  " style="margin-left: -20px;">
+            <div class="card-header bg-success text-white ">
+                <h5 class="mb-0">Danh sách hóa đơn cần tìm</h5>
+                
+        </div>
+        <?php include('search_order.php') ?> 
 
     </body>
 </html>
 
 <style>
     #pieChart {
-        max-width: 200px;
-        max-height: 200px;
-        
+        max-width: 400px;
+        max-height: 400px;
+        margin: 0 auto;
     }
 </style>

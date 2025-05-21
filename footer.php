@@ -39,7 +39,7 @@
     <div class="container-fluid" style="background-color: #171a21;color: #c6d4df;">
       <div class="row align-items-center mb-4" >
         <div class="col-md-2 text-center text-md-start mb-3 mb-md-0" style="padding-top: 10px; padding-left: 50px;">
-          <img src="https://store.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo" class="footer-logo">
+          <img src="images/logo.PNG" alt="Steam Logo" class="footer-logo">
         </div>
         <div class="col-md-7 text-center text-md-start">
           <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
