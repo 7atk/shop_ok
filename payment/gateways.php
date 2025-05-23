@@ -17,10 +17,10 @@ if (isset($_POST['accept'])) {
         $conn->beginTransaction();
 
         // Thêm đơn hàng vào bảng `orders`
-        $sql = "INSERT INTO orders (customer_name, phone, address, email, payment_method, order_date)
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO orders (customer_name, phone, address, email, payment_method, order_date,order_id)
+                VALUES (?, ?, ?, ?, ?, ?,?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$name, $phone, $address, $email, $payment, $date]);
+        $stmt->execute([$name, $phone, $address, $email, $payment, $date,$orderId]);
 
         // Thêm từng sản phẩm vào `order_items`
         $sqlItem = "INSERT INTO order_items (order_id, product_id, quantity, price, subtotal, order_time)

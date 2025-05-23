@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 23, 2025 lúc 05:49 PM
+-- Thời gian đã tạo: Th5 22, 2025 lúc 11:07 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Phiên bản PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -83,12 +83,7 @@ INSERT INTO `orders` (`id`, `customer_name`, `phone`, `address`, `payment_method
 (4, 'yen', '7890654321', 'nui khong dong', 'Cod', '2026-05-22 09:30:13', 'yen@gmail.com', 'DH20250522HZK681'),
 (5, 'kiet', '65852847529', 'thieu lam tu', 'Cod', '2024-05-22 09:30:13', 'kiet@gmail.com', 'DH20250522GBJ611'),
 (6, 'kiet', '01112333', 'kha vạn cân', 'Cod', '2025-05-22 10:13:55', 'kiet@gmail.com', 'DH20250522RUJ237'),
-(7, 'vinh', '4981764981', 'ngu doc giao', 'Onl', '2025-05-22 10:59:41', 'vinh@gmail.com', 'DH20250522EXJ233'),
-(8, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-07-20 23:21:39', 'quangtran@gmail.com', 'DH20250519UDI801'),
-(10, 'noname', '0944552724', 'vo luong son', 'Cod', '2025-06-19 23:32:12', 'quangtran@gmail.com', 'DH20250519HMK267'),
-(11, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-05-19 23:32:29', 'quangtran@gmail.com', 'DH20250519RFW341'),
-(12, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-08-30 17:59:21', 'quangtran@gmail.com', 'DH20250520POQ372'),
-(13, 'voluongthienton', '094455272499', 'vo luong son', 'Cod', '2025-05-21 21:43:23', 'quangtran644@gmail.com', 'DH20250521YUC606');
+(7, 'vinh', '4981764981', 'ngu doc giao', 'Onl', '2025-05-22 10:59:41', 'vinh@gmail.com', 'DH20250522EXJ233');
 
 -- --------------------------------------------------------
 
@@ -121,22 +116,11 @@ INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`, `price`, `subto
 ('DH20250522GBJ611', 'T7', 5, 550000, 2750000, 8, '2024-05-22 09:30:13'),
 ('DH20250522GBJ611', 'A8', 5, 700000, 3500000, 9, '2024-05-22 09:30:13'),
 ('DH20250522RUJ237', 'A3', 2, 800000, 1600000, 10, '2025-05-22 10:13:55'),
-('DH20250519UDI801', 'A2', 10, 900000, 9000000, 11, '2025-07-20 23:21:39'),
-('DH20250519HMK267', 'A3', 10, 800000, 8000000, 14, '2025-06-19 23:32:12'),
-('DH20250519HMK267', 'A4', 10, 250000, 2500000, 15, '2025-06-19 23:32:12'),
-('DH20250519RFW341', 'A2', 10, 900000, 9000000, 16, '2025-05-19 23:32:29'),
-('DH20250519RFW341', 'A3', 10, 800000, 8000000, 17, '2025-05-19 23:32:29'),
-('DH20250520POQ372', 'A3', 10, 800000, 8000000, 18, '2025-08-30 17:59:21'),
-('DH20250520POQ372', 'A2', 10, 900000, 9000000, 19, '2025-08-30 17:59:21'),
-('DH20250520POQ372', 'A1', 10, 850000, 8500000, 20, '2025-08-30 17:59:21'),
-('DH20250521YUC606', 'A3', 10, 800000, 8000000, 21, '2025-05-21 21:43:23'),
-('DH20250521YUC606', 'A4', 10, 250000, 2500000, 22, '2025-05-21 21:43:23'),
-('DH20250521YUC606', 'RPG1', 10, 650000, 6500000, 23, '2025-05-21 21:43:23'),
-('DH20250522RUJ237', 'A1', 1, 850000, 850000, 24, '2025-05-22 10:13:55'),
-('DH20250522RUJ237', 'A2', 1, 900000, 900000, 25, '2025-05-22 10:13:55'),
-('DH20250522RUJ237', 'A5', 1, 750000, 750000, 26, '2025-05-22 10:13:55'),
-('DH20250522RUJ237', 'A6', 1, 950000, 950000, 27, '2025-05-22 10:13:55'),
-('DH20250522EXJ233', 'F6', 6, 850000, 5100000, 28, '2025-05-22 10:59:41');
+('DH20250522RUJ237', 'A1', 1, 850000, 850000, 11, '2025-05-22 10:13:55'),
+('DH20250522RUJ237', 'A2', 1, 900000, 900000, 12, '2025-05-22 10:13:55'),
+('DH20250522RUJ237', 'A5', 1, 750000, 750000, 13, '2025-05-22 10:13:55'),
+('DH20250522RUJ237', 'A6', 1, 950000, 950000, 14, '2025-05-22 10:13:55'),
+('DH20250522EXJ233', 'F6', 6, 850000, 5100000, 15, '2025-05-22 10:59:41');
 
 -- --------------------------------------------------------
 
@@ -155,7 +139,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id_role`, `ten_role`) VALUES
 (1, 'admin'),
-(2, 'nhân viên'),
+(2, 'user'),
 (3, 'guest');
 
 -- --------------------------------------------------------
@@ -181,7 +165,6 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`id`, `masp`, `tensp`, `idlsp`, `mota`, `hinhanh`, `gia`, `slnhap`, `slban`) VALUES
-(26, 'MC1', 'Máy game One Xplayer', 6, 'Hãng sản xuất: One Netbook\r\nĐời máy: One Xplayer \r\nTình trạng: New/fullBOX\r\nCác phiên bản: i7-1195G7(SSD1TB)  AMD Ryzen® 5800U (SSD-1TB)  MINI 7&quot; i7-1195G7 (SSD1TB)\r\nChú ý: Máy chưa có sẵn khách Order cọc trước 5.000.000 vnđ sau 10-15 ngày sẽ nhận má', 'img_68284b84db9ed.jpg', 25000000, 30, 5),
 (27, 'A1', 'Devil May Cry 5', 1, 'Game hành động chặt chém đỉnh cao với đồ họa đẹp và gameplay tốc độ.', 'img_68284fa14b85b.jpg', 850000, 70, 3),
 (28, 'A2', 'Sekiro: Shadows Die Twice', 1, 'Game hành động lén lút, thông minh, đòi hỏi kỹ năng né đỡ và phản đòn chính xác.', 'img_68285112038f3.jpg', 900000, 50, 2),
 (29, 'A3', 'DOOM Eternal', 1, 'Game bắn súng góc nhìn thứ nhất với nhịp độ nhanh và âm nhạc mạnh mẽ.', 'img_682850052f8a1.jpg', 800000, 60, 5),
@@ -227,16 +210,6 @@ INSERT INTO `sanpham` (`id`, `masp`, `tensp`, `idlsp`, `mota`, `hinhanh`, `gia`,
 (79, 'M3', 'Nintendo Switch OLED', 6, 'Phiên bản nâng cấp của Switch với màn hình OLED và dock mới.', 'img_6828632fba275.jpg', 9500000, 25, 11),
 (80, 'M4', 'Steam Deck', 6, 'Máy chơi game cầm tay của Valve chạy SteamOS, hỗ trợ chơi game PC.', 'img_6828634457fe4.jpg', 11500000, 10, 5),
 (81, 'M5', 'PlayStation 4 Slim', 6, 'Phiên bản gọn nhẹ của PS4, vẫn hỗ trợ nhiều tựa game đình đám.', 'img_68286356a6935.jpg', 6900000, 30, 13),
-(82, 'F1', 'Mario Kart 8 Deluxe', 5, 'Game đua xe vui nhộn phù hợp với mọi lứa tuổi, hỗ trợ chơi nhiều người.', 'img_6828677c160bd.jpg', 900000, 40, 34),
-(83, 'F2', 'Overcooked! 2', 5, 'Game nấu ăn hỗn loạn đầy hài hước, khuyến khích teamwork trong gia đình.', 'img_68286788a1fb4.jpg', 450000, 60, 54),
-(84, 'F3', 'Animal Crossing: New Horizons', 5, 'Game mô phỏng cuộc sống thư giãn, xây dựng đảo và giao lưu bạn bè.', 'img_6828679557d86.jpg', 950000, 35, 23),
-(85, 'F4', 'Just Dance 2024', 5, 'Game nhảy theo nhạc, vui nhộn, lý tưởng cho tiệc gia đình.', 'img_682867a3cb83f.jpg', 800000, 30, 21),
-(86, 'F5', 'Lego Marvel Super Heroes', 5, 'Game hành động hài hước dành cho mọi độ tuổi, đặc biệt là fan Marvel.', 'img_682867b48179a.jpg', 700000, 50, 32),
-(87, 'F6', 'Super Mario Party', 5, 'Game party với nhiều mini-game đa dạng, chơi cùng gia đình cực kỳ vui.', 'img_682867c1e3abb.jpg', 850000, 45, 32),
-(88, 'F7', 'Minecraft', 5, 'Game xây dựng thế giới mở nổi tiếng, kích thích sáng tạo và phù hợp với mọi lứa tuổi.', 'img_682867ce43756.jpg', 780000, 60, 55),
-(89, 'F8', 'Lego City Undercover', 5, 'Game phiêu lưu thế giới mở với phong cách hài hước.', 'img_682867de7568b.jpg', 600000, 40, 24),
-(90, 'F9', 'Paw Patrol: On a Roll', 5, 'Game đơn giản dành cho trẻ em, dựa theo loạt phim hoạt hình Paw Patrol.', 'img_682867ed10135.jpg', 480000, 35, 11),
-(91, 'F10', 'Lego Harry Potter Collection', 5, 'Kết hợp hành động và giải đố, lấy cảm hứng từ truyện Harry Potter.', 'img_682867fc20686.jpg', 650000, 50, 44),
 (92, 'FPS1', 'Call of Duty: Modern Warfare II', 4, 'Modern Warfare II là phần tiếp theo của loạt game Call of Duty nổi tiếng, mang lại trải nghiệm chiến đấu chân thực và kịch tính. Với chiến dịch hấp dẫn, chế độ co-op Spec Ops và multiplayer đa dạng, game là lựa chọn hàng đầu cho game thủ yêu FPS.', 'img_682c3e710d36a.jpg', 899000, 100, 45),
 (93, 'FPS2', 'Counter-Strike 2', 4, 'Counter-Strike 2 đánh dấu bước tiến lớn với engine Source 2, cải thiện hình ảnh, cơ chế bắn và hệ thống smoke chiến thuật. Game vẫn giữ nguyên bản chất cạnh tranh căng thẳng, phù hợp với cả người chơi casual và eSports.', 'img_682c3e912d248.jpg', 100000, 200, 150),
 (94, 'FPS3', 'Valorant', 4, 'Valorant là game bắn súng 5v5 theo lượt từ Riot Games, nổi bật với sự kết hợp giữa kỹ năng bắn súng và kỹ năng đặc biệt từ các &quot;agent&quot;. Đòi hỏi chiến thuật, phản xạ nhanh và phối hợp đội nhóm để chiến thắng.', 'img_682c3ea5a17f3.jpg', 100000, 300, 200),
@@ -267,7 +240,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `PWD`, `email`, `roles`) VALUES
-(1, 'drill', '$2y$10$MyPhqftiu8viiiuvMskM2OLPdZKUJkTqT91zbg/GMw2x6xevVwBqK', 'drill@gmail.com', 3),
+(1, 'drill', '$2y$10$MyPhqftiu8viiiuvMskM2OLPdZKUJkTqT91zbg/GMw2x6xevVwBqK', 'drill@gmail.com', 2),
 (2, 'admin123', '$2y$10$WPNCqz5ikeLNbojxczke1emWbgeAQHaGWorvWkvsAtWNY.0IU..uq', 'nhozlong089@gmail.com', 1),
 (3, 'qwe', '$2y$10$OcSg6LeAtKheelXz.lMmTu8kN0H0e3T5.4eo/Qxeu4L8g.xiqnvV6', 'qwe123@yahoo.com', 2);
 
@@ -339,13 +312,13 @@ ALTER TABLE `loai_sp`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
