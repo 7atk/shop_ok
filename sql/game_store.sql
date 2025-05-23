@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 20, 2025 lúc 05:54 PM
+-- Thời gian đã tạo: Th5 23, 2025 lúc 05:49 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -77,9 +77,18 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer_name`, `phone`, `address`, `payment_method`, `order_date`, `email`, `order_id`) VALUES
-(8, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-05-19 23:21:39', 'quangtran@gmail.com', 'DH20250519UDI801'),
-(10, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-05-19 23:32:12', 'quangtran@gmail.com', 'DH20250519HMK267'),
-(11, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-05-19 23:32:29', 'quangtran@gmail.com', 'DH20250519RFW341');
+(1, 'quang', '0987654321', 'vo luong son', 'Onl', '2025-05-22 09:29:18', 'quang@gmail.com', 'DH20250522YLD266'),
+(2, 'phat', '1234567890', 'quang minh dinh', 'Cod', '2025-06-22 09:30:13', 'phat@gmail.com', 'DH20250522OXB526'),
+(3, 'huong', '3214567890', 'nui nga mi', 'Cod', '2025-07-22 09:30:13', 'huong@gmail.com', 'DH20250522JOV643'),
+(4, 'yen', '7890654321', 'nui khong dong', 'Cod', '2026-05-22 09:30:13', 'yen@gmail.com', 'DH20250522HZK681'),
+(5, 'kiet', '65852847529', 'thieu lam tu', 'Cod', '2024-05-22 09:30:13', 'kiet@gmail.com', 'DH20250522GBJ611'),
+(6, 'kiet', '01112333', 'kha vạn cân', 'Cod', '2025-05-22 10:13:55', 'kiet@gmail.com', 'DH20250522RUJ237'),
+(7, 'vinh', '4981764981', 'ngu doc giao', 'Onl', '2025-05-22 10:59:41', 'vinh@gmail.com', 'DH20250522EXJ233'),
+(8, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-07-20 23:21:39', 'quangtran@gmail.com', 'DH20250519UDI801'),
+(10, 'noname', '0944552724', 'vo luong son', 'Cod', '2025-06-19 23:32:12', 'quangtran@gmail.com', 'DH20250519HMK267'),
+(11, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-05-19 23:32:29', 'quangtran@gmail.com', 'DH20250519RFW341'),
+(12, 'ggez', '0944552724', 'fafaaf', 'Cod', '2025-08-30 17:59:21', 'quangtran@gmail.com', 'DH20250520POQ372'),
+(13, 'voluongthienton', '094455272499', 'vo luong son', 'Cod', '2025-05-21 21:43:23', 'quangtran644@gmail.com', 'DH20250521YUC606');
 
 -- --------------------------------------------------------
 
@@ -102,11 +111,32 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`, `price`, `subtotal`, `id`, `order_time`) VALUES
-('DH20250519UDI801', 'A2', 10, 900000, 9000000, 11, '2025-05-19 23:21:39'),
-('DH20250519HMK267', 'A3', 10, 800000, 8000000, 14, '2025-05-19 23:32:12'),
-('DH20250519HMK267', 'A4', 10, 250000, 2500000, 15, '2025-05-19 23:32:12'),
+('DH20250522YLD266', 'A1', 10, 850000, 8500000, 1, '2025-05-22 09:29:18'),
+('DH20250522YLD266', 'T1', 10, 850000, 8500000, 2, '2025-05-22 09:29:18'),
+('DH20250522YLD266', 'M2', 2, 13500000, 27000000, 3, '2025-05-22 09:29:18'),
+('DH20250522OXB526', 'F4', 10, 800000, 8000000, 4, '2025-06-22 09:30:13'),
+('DH20250522JOV643', 'F1', 10, 900000, 9000000, 5, '2025-07-22 09:30:13'),
+('DH20250522JOV643', 'A2', 3, 900000, 2700000, 6, '2025-07-22 09:30:13'),
+('DH20250522HZK681', 'FPS8', 3, 500000, 1500000, 7, '2026-05-22 09:30:13'),
+('DH20250522GBJ611', 'T7', 5, 550000, 2750000, 8, '2024-05-22 09:30:13'),
+('DH20250522GBJ611', 'A8', 5, 700000, 3500000, 9, '2024-05-22 09:30:13'),
+('DH20250522RUJ237', 'A3', 2, 800000, 1600000, 10, '2025-05-22 10:13:55'),
+('DH20250519UDI801', 'A2', 10, 900000, 9000000, 11, '2025-07-20 23:21:39'),
+('DH20250519HMK267', 'A3', 10, 800000, 8000000, 14, '2025-06-19 23:32:12'),
+('DH20250519HMK267', 'A4', 10, 250000, 2500000, 15, '2025-06-19 23:32:12'),
 ('DH20250519RFW341', 'A2', 10, 900000, 9000000, 16, '2025-05-19 23:32:29'),
-('DH20250519RFW341', 'A3', 10, 800000, 8000000, 17, '2025-05-19 23:32:29');
+('DH20250519RFW341', 'A3', 10, 800000, 8000000, 17, '2025-05-19 23:32:29'),
+('DH20250520POQ372', 'A3', 10, 800000, 8000000, 18, '2025-08-30 17:59:21'),
+('DH20250520POQ372', 'A2', 10, 900000, 9000000, 19, '2025-08-30 17:59:21'),
+('DH20250520POQ372', 'A1', 10, 850000, 8500000, 20, '2025-08-30 17:59:21'),
+('DH20250521YUC606', 'A3', 10, 800000, 8000000, 21, '2025-05-21 21:43:23'),
+('DH20250521YUC606', 'A4', 10, 250000, 2500000, 22, '2025-05-21 21:43:23'),
+('DH20250521YUC606', 'RPG1', 10, 650000, 6500000, 23, '2025-05-21 21:43:23'),
+('DH20250522RUJ237', 'A1', 1, 850000, 850000, 24, '2025-05-22 10:13:55'),
+('DH20250522RUJ237', 'A2', 1, 900000, 900000, 25, '2025-05-22 10:13:55'),
+('DH20250522RUJ237', 'A5', 1, 750000, 750000, 26, '2025-05-22 10:13:55'),
+('DH20250522RUJ237', 'A6', 1, 950000, 950000, 27, '2025-05-22 10:13:55'),
+('DH20250522EXJ233', 'F6', 6, 850000, 5100000, 28, '2025-05-22 10:59:41');
 
 -- --------------------------------------------------------
 
@@ -125,7 +155,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id_role`, `ten_role`) VALUES
 (1, 'admin'),
-(2, 'user'),
+(2, 'nhân viên'),
 (3, 'guest');
 
 -- --------------------------------------------------------
@@ -206,7 +236,17 @@ INSERT INTO `sanpham` (`id`, `masp`, `tensp`, `idlsp`, `mota`, `hinhanh`, `gia`,
 (88, 'F7', 'Minecraft', 5, 'Game xây dựng thế giới mở nổi tiếng, kích thích sáng tạo và phù hợp với mọi lứa tuổi.', 'img_682867ce43756.jpg', 780000, 60, 55),
 (89, 'F8', 'Lego City Undercover', 5, 'Game phiêu lưu thế giới mở với phong cách hài hước.', 'img_682867de7568b.jpg', 600000, 40, 24),
 (90, 'F9', 'Paw Patrol: On a Roll', 5, 'Game đơn giản dành cho trẻ em, dựa theo loạt phim hoạt hình Paw Patrol.', 'img_682867ed10135.jpg', 480000, 35, 11),
-(91, 'F10', 'Lego Harry Potter Collection', 5, 'Kết hợp hành động và giải đố, lấy cảm hứng từ truyện Harry Potter.', 'img_682867fc20686.jpg', 650000, 50, 44);
+(91, 'F10', 'Lego Harry Potter Collection', 5, 'Kết hợp hành động và giải đố, lấy cảm hứng từ truyện Harry Potter.', 'img_682867fc20686.jpg', 650000, 50, 44),
+(92, 'FPS1', 'Call of Duty: Modern Warfare II', 4, 'Modern Warfare II là phần tiếp theo của loạt game Call of Duty nổi tiếng, mang lại trải nghiệm chiến đấu chân thực và kịch tính. Với chiến dịch hấp dẫn, chế độ co-op Spec Ops và multiplayer đa dạng, game là lựa chọn hàng đầu cho game thủ yêu FPS.', 'img_682c3e710d36a.jpg', 899000, 100, 45),
+(93, 'FPS2', 'Counter-Strike 2', 4, 'Counter-Strike 2 đánh dấu bước tiến lớn với engine Source 2, cải thiện hình ảnh, cơ chế bắn và hệ thống smoke chiến thuật. Game vẫn giữ nguyên bản chất cạnh tranh căng thẳng, phù hợp với cả người chơi casual và eSports.', 'img_682c3e912d248.jpg', 100000, 200, 150),
+(94, 'FPS3', 'Valorant', 4, 'Valorant là game bắn súng 5v5 theo lượt từ Riot Games, nổi bật với sự kết hợp giữa kỹ năng bắn súng và kỹ năng đặc biệt từ các &quot;agent&quot;. Đòi hỏi chiến thuật, phản xạ nhanh và phối hợp đội nhóm để chiến thắng.', 'img_682c3ea5a17f3.jpg', 100000, 300, 200),
+(95, 'FPS4', 'Battlefield 2042', 4, 'Battlefield 2042 đưa người chơi đến các chiến trường tương lai, nơi công nghệ và chiến tranh hiện đại thống trị. Hỗ trợ 128 người chơi, phương tiện đa dạng, thời tiết thay đổi và bản đồ khổng lồ.', 'img_682c3eaf952bd.jpg', 790000, 120, 60),
+(96, 'FPS5', 'DOOM Eternal', 4, 'DOOM Eternal là phần tiếp theo của dòng game DOOM huyền thoại, với gameplay tốc độ cao, đồ họa đỉnh cao và kho vũ khí phong phú. Người chơi vào vai Doom Slayer, tiêu diệt lũ quỷ xâm lăng Trái Đất.', 'img_682c3ec253171.jpg', 650000, 80, 40),
+(97, 'FPS6', 'Escape from Tarkov', 4, 'Escape from Tarkov là tựa game bắn súng sinh tồn cực kỳ chân thực, nơi bạn không chỉ phải tiêu diệt kẻ thù mà còn phải loot đồ và tìm đường thoát thân. Cơ chế thương tích, đạn đạo và kinh tế chợ đen tạo nên sự độc đáo.', 'img_682c3ecf8e0e3.jpg', 850000, 50, 25),
+(98, 'FPS7', 'Overwatch 2', 4, 'Overwatch 2 là game FPS hero-shooter tốc độ cao của Blizzard, với dàn nhân vật đa dạng, mỗi người sở hữu kỹ năng riêng. Game hướng đến chơi đội hình 5v5, đậm chất hành động và chiến thuật.', 'img_682c3ee58e189.jpg', 20000, 180, 90),
+(99, 'FPS8', 'Rainbow Six Siege', 4, 'Rainbow Six Siege là game bắn súng chiến thuật nổi bật với lối chơi phá hoại, đặt bẫy và phòng thủ. Mỗi trận đấu là một màn đấu trí giữa phe công và thủ, đòi hỏi giao tiếp và chiến lược tuyệt đối.', 'img_682c3ef82b6b8.jpg', 500000, 150, 85),
+(100, 'FPS9', 'PUBG: Battlegrounds', 4, 'PUBG là tựa game battle royale đình đám, đưa 100 người chơi vào một bản đồ rộng lớn để chiến đấu đến người sống sót cuối cùng. Với gameplay sinh tồn thực tế và nhịp độ căng thẳng, PUBG đã tạo nên cơn sốt toàn cầu.', 'img_682c3f04ba29e.jpg', 300000, 400, 320),
+(101, 'FPS10', 'Far Cry 6', 4, 'Far Cry 6 đưa bạn đến Yara, một quốc gia giả tưởng bị kiểm soát bởi chế độ độc tài. Người chơi nhập vai một chiến binh du kích, chiến đấu để giải phóng đất nước trong thế giới mở rộng lớn và phong phú.', 'img_682c3f10d699d.jpg', 750000, 100, 55);
 
 -- --------------------------------------------------------
 
@@ -227,7 +267,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `PWD`, `email`, `roles`) VALUES
-(1, 'drill', '$2y$10$MyPhqftiu8viiiuvMskM2OLPdZKUJkTqT91zbg/GMw2x6xevVwBqK', 'drill@gmail.com', 2),
+(1, 'drill', '$2y$10$MyPhqftiu8viiiuvMskM2OLPdZKUJkTqT91zbg/GMw2x6xevVwBqK', 'drill@gmail.com', 3),
 (2, 'admin123', '$2y$10$WPNCqz5ikeLNbojxczke1emWbgeAQHaGWorvWkvsAtWNY.0IU..uq', 'nhozlong089@gmail.com', 1),
 (3, 'qwe', '$2y$10$OcSg6LeAtKheelXz.lMmTu8kN0H0e3T5.4eo/Qxeu4L8g.xiqnvV6', 'qwe123@yahoo.com', 2);
 
@@ -299,13 +339,13 @@ ALTER TABLE `loai_sp`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -317,7 +357,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

@@ -3,7 +3,7 @@
 
 // Kiểm tra quyền truy cập
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
-    header("Location: http://localhost/shop_ok/index.php?page=login");
+    header("Location: ../login/login.php");
     exit();
 }
 

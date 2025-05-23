@@ -30,7 +30,7 @@ $STT = $start;
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-1 rounded">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Admin - User</a>
+        <a class="navbar-brand" href="../admin/dashboard.php">Admin - User</a>
     </div>
 </nav>
 <body class="bg-light">
@@ -58,41 +58,35 @@ $STT = $start;
                             <?php
                             if ($item['roles'] == 1) {
                                 echo "Admin";
-                            } else {
-                                echo "Người dùng";
+                            } 
+                            elseif ($item['roles'] == 2) {
+                                echo "Nhân Viên";
+                            }
+                            else{
+                                echo "Khách";
                             }
                             ?>
-                        <td>
-                            <form method="post" action="user/delete_user.php">
-                                <input type="hidden" name="id_user" value="<?php echo $item['id_user']; ?>" />
+                       <td>
+    <!-- Form sửa -->
+    <form method="post" action="edit_user.php" style="display:inline;">
+        <input type="hidden" name="id_user" value="<?php echo $item['id_user']; ?>" />
+        <input class="btn btn-sm btn-primary"
+               type="submit"
+               name="edit"
+               value="Sửa" />
+    </form>
 
-                                <input class="btn btn-sm btn-primary"
-                                       type="button"
-                                       value="Sửa"
-                                       onclick="location.href='?page=edit_user&id_user=<?php echo $item['id_user']; ?>'" />
+    <!-- Form xóa -->
+    <form method="post" action="delete_user.php" style="display:inline;">
+        <input type="hidden" name="id_user" value="<?php echo $item['id_user']; ?>" />
+        <input class="btn btn-sm btn-danger"
+               type="submit"
+               name="delete"
+               value="Xóa"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" />
+    </form>
+</td>
 
-                                <input class="btn btn-sm btn-danger"
-                                       type="submit"
-                                       name="delete"
-                                       value="Xóa"
-                                       onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" />
-                            </form>
-                        <!-- <td>
-                            <form method="post" action="sanpham/delete_sanpham.php">
-                                <input type="hidden" name="id" value="<?php echo $item['idsp']; ?>" />
-
-                                <input class="btn btn-sm btn-primary"
-                                       type="button"
-                                       value="Sửa"
-                                       onclick="location.href='?page=edit_sanpham&idsp=<?php echo $item['idsp']; ?>'" />
-
-                                <input class="btn btn-sm btn-danger"
-                                       type="submit"
-                                       name="delete"
-                                       value="Xóa"
-                                       onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" />
-                            </form>
-                        </td> -->
                     </tr>
                 <?php } ?>
             </tbody>

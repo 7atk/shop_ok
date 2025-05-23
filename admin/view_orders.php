@@ -2,10 +2,10 @@
 
 
 // Chỉ cho phép admin
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
-    header("Location: ../index.php?page=login");
-    exit();
-}
+// if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+//     header("Location: ../index.php?page=login");
+//     exit();
+// }
 
 require_once('../libs/config.php');
 
@@ -35,7 +35,7 @@ try {
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-1 rounded">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Admin - Đơn hàng</a>
+        <a class="navbar-brand" href="dashboard.php">Admin - Đơn hàng</a>
     </div>
 </nav>
 
@@ -71,7 +71,7 @@ try {
                             
                             <td><?= number_format($order['total_amount'], 0, ',', '.') ?> VNĐ</td>
                             <td>
-                                <a href="order_details.php?order_id=<?= $order['order_id'] ?>" class="btn btn-sm btn-info">Xem</a>
+                                <a href="order_details.php?order_id=<?= $order['order_id'] ?>" class="btn btn-sm btn-danger">Xoá</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

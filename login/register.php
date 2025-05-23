@@ -42,7 +42,7 @@
              echo "<script>alert('Mật khẩu không khớp. Vui lòng nhập lại.');</script>";
         } else {
           // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-          $roles = 2; // Giá trị mặc định cho vai trò người dùng
+          $roles = 3; // Giá trị mặc định cho vai trò người dùng
           $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
           // Thực hiện thêm người dùng mới vào cơ sở dữ liệu
           $sql = "INSERT INTO users (USERNAME, PWD, EMAIL,roles) VALUES ('$user_name', '$hashed_password', '$email', '$roles')";

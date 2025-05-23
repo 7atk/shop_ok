@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION['role'])&&$_SESSION['role']=3){
+    echo "<script>alert('Bạn không có quyền truy cập trang này!');</script>";{
+        echo "<script>location.href='index.php';</script>"; 
+    exit;
+}}
 $errors = [];
 if(!isset($_GET['masp'])) {
     echo "<script>alert('Không có mã sản phẩm'); location.href='index.php?page=list_sanpham';</script>";

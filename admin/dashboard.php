@@ -3,14 +3,13 @@ session_start();
 
 // Kiểm tra quyền truy cập
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
-    header("Location: http://localhost/shop_ok/index.php?page=login");
+    header("Location:../index.php?page=login");
     exit();
 }
 
-require_once('../libs/config.php'); // File này phải thiết lập kết nối PDO trong biến $pdo
+require_once('../libs/config.php'); 
 
-
-// }
+// truy van chrt
 $years = $conn->query("SELECT DISTINCT YEAR(order_time) as year FROM order_items ORDER BY year DESC")->fetchAll(PDO::FETCH_COLUMN);
 
 // Mặc định tháng/năm hiện tại nếu không chọn
@@ -70,24 +69,10 @@ foreach ($data as $row) {
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <a class="navbar-brand" href="dashboard.php">Admin Dashboard</a>
     </div>
-    
-					 
-					<form method="get" action="search_order.php" class="d-flex px-2">
-    
-                          <input type="hidden" name="page" value="search">
-
-                            <!-- <?php
    
-                               $search = isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '';
-                             ?> -->
-
-                        <input class="form-control me-2" type="search" name="tenkh" placeholder="Search"
-                            	 value="<?php echo $search; ?>">
-
-                              <button class="btn btn-warning">Search</button>
-</form>
+ 
 </nav>
 
 
@@ -106,7 +91,10 @@ foreach ($data as $row) {
           <a class="nav-link active" href="../index.php?page=list_sanpham">Ql Sản phẩm</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link active" href="view_orders.php">Ql Đơn Hàng</a>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link active" href="Search_order.php">Ql CT Đơn Hàng</a>
         </li>
       </ul>
       <hr class="d-sm-none">
@@ -114,7 +102,7 @@ foreach ($data as $row) {
     <div class="col-sm-8">
             <div class="card shadow">
                
-            <?php include('m_chart.php'); ?>
+            <?php require_once('m_chart.php'); ?>
             
              </div>
       </div>
@@ -123,7 +111,7 @@ foreach ($data as $row) {
       <div class="card shadow" style="width: 100%;height: 100%;">
          <h2 style="text-align:center;">Thống kê tỉ lệ sản phẩm đã bán</h2>
 
-<form method="get" action="">
+<form method="get" action="" style="margin-left: 30px">
     <label>Chọn tháng: 
         <select name="month">
             <?php for ($m = 1; $m <= 12; $m++): ?>
@@ -175,6 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
             plugins: {
                 legend: {
                     position: 'bottom'
+                    
                 }
             }
         }
@@ -183,15 +172,29 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
         </div>
-        
+    
+
     </div>
-<div class="col-12">
-        <div class="card shadow  " style="margin-left: -20px;">
-            <div class="card-header bg-success text-white ">
-                <h5 class="mb-0">Danh sách hóa đơn cần tìm</h5>
-                
-        </div>
-        <?php include('search_order.php') ?> 
+        <div class="col-sm-4">
+            <div class="card shadow">
+            <h3 style="text-align:center">Tổng số sản phẩm:</h3>
+            
+</div>
+</div>
+
+<div class="col-sm-4">
+    <div class="card shadow">
+    <h3 style="text-align:center">Tổng số User:</h3>
+</div>
+</div>
+
+<div class="col-sm-4">
+    <div class="card shadow">
+    <h3 style="text-align:center">Tổng doanh thu ngày:</h3>
+</div>
+</div>
+
+
 
     </body>
 </html>
