@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($_SESSION['role'])&&$_SESSION['role']!=1){
+if(!isset($_SESSION['role'])||$_SESSION['role']==3){
     echo "<script>alert('Bạn không có quyền truy cập trang này!');</script>";{
         echo "<script>location.href='index.php';</script>"; 
     exit;
