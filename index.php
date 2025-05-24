@@ -131,7 +131,7 @@ else
 	<?php 
 		include('footer.php');
 		?> 	
-	?>
+	
   </footer>
 </footer>
 	</footer>
