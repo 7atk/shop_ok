@@ -178,6 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="col-sm-4">
             <div class="card shadow">
             <h3 style="text-align:center">Tổng số sản phẩm:</h3>
+            <h1 style="text-align:center"><?php include('tongsp.php') ?></h1>
             
 </div>
 </div>
@@ -185,12 +186,14 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="col-sm-4">
     <div class="card shadow">
     <h3 style="text-align:center">Tổng số User:</h3>
+    <h1 style="text-align:center"><?php include('tonguser.php') ?></h1>
 </div>
 </div>
 
 <div class="col-sm-4">
     <div class="card shadow">
     <h3 style="text-align:center">Tổng doanh thu ngày:</h3>
+    <h1 style="text-align:center"><?php include('tongdoanhthu.php') ?></h1>
 </div>
 </div>
 

@@ -92,9 +92,9 @@
 						</a>
 					</div>
 					<
-					<div class="navbar-nav" style="color:white">
+					<div class="navbar-nav" style="color:yellow">
 						<?php if(isset($_SESSION['username'] ))
-						 echo $_SESSION['username'];     ?>
+						 echo "Welcome: ".$_SESSION['username'];     ?>
 								</div>
 					<!-- <form method="post" action="index.php?page=search" class="d-flex px-2">
 						<?php $data['search'] = isset($_POST['search']) ? $_POST['search'] : '';
