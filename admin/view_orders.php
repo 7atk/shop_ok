@@ -71,7 +71,8 @@ try {
                             
                             <td><?= number_format($order['total_amount'], 0, ',', '.') ?> VNĐ</td>
                             <td>
-                                <a href="order_details.php?order_id=<?= $order['order_id'] ?>" class="btn btn-sm btn-danger">Xoá</a>
+                                <a href="delete_order.php?order_id=<?= $order['order_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?');">Xoá</a>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>

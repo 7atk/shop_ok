@@ -37,19 +37,11 @@ if ($search !== '') {
     $price = is_numeric($row['gia']) ? $row['gia'] : 0;
     $gianhap = number_format($price, 0);
     $giacu = number_format($price * 1.1, 0);
-            }
+            
 
-            // Phân trang
            
-        } else {
-            echo "Không tìm thấy sản phẩm nào.";
-        }
-    } catch (PDOException $e) {
-        echo "Lỗi truy vấn: " . $e->getMessage();
-    }
-} else {
-    echo "Vui lòng nhập từ khóa tìm kiếm.";
-}
+           
+   
 ?>
 <div class="col-md-6 col-lg-3">
         <div class="card-box">
@@ -83,6 +75,19 @@ if ($search !== '') {
             </form>
         </div>
     </div>
+    <?php
+            }
+        } else {
+            echo "<p class='text-danger'>Không tìm thấy sản phẩm nào phù hợp với từ khóa: <i>" . htmlspecialchars($search) . "</i></p>";
+        }
+    } catch (PDOException $e) {
+        echo "<p class='text-danger'>Lỗi truy vấn: " . htmlspecialchars($e->getMessage()) . "</p>";
+    }
+    } else {
+        echo "<p class='text-warning'>Vui lòng nhập từ khóa tìm kiếm.</p>";
+    }
+?>
+
 <?php
   
             // Hiển thị phân trang

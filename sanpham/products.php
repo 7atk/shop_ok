@@ -20,7 +20,7 @@ if (isset($_GET['idlsp'])) {
 }
 
 // --- Lấy tổng số sản phẩm ---
-$count_sql = "SELECT COUNT(*) AS total FROM SANPHAM s 
+$count_sql = "SELECT COUNT(*) AS total FROM sanpham s 
               JOIN loai_sp lsp ON s.idlsp = lsp.idlsp $where";
 $stmt = $conn->prepare($count_sql);
 $stmt->execute($params);
@@ -29,7 +29,7 @@ $total_pages = ceil($total_rows / $limit);
 
 // --- Truy vấn sản phẩm ---
 $sql = "SELECT masp, tensp, tenlsp, hinhanh, gia 
-        FROM SANPHAM s 
+        FROM sanpham s 
         JOIN loai_sp lsp ON s.idlsp = lsp.idlsp 
         $where 
         LIMIT :limit OFFSET :offset";

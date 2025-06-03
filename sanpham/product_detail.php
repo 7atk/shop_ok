@@ -13,7 +13,7 @@ if (!$idsp) {
 }
 
 // Truy vấn dữ liệu sản phẩm
-$sql = "SELECT masp, tensp, gia, hinhanh, mota FROM SANPHAM WHERE maSP='$idsp'";
+$sql = "SELECT masp, tensp, gia, hinhanh, mota FROM sanpham WHERE maSP='$idsp'";
 $result = SelectAll($sql);
 
 foreach ($result as $row) {

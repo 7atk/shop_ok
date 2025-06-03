@@ -95,11 +95,11 @@ if (!empty($_POST['ok'])) {
                         <select class="form-select btn-warning text-start" name="idloai">
                             <option value="" selected>Loại sản phẩm</option>
                             <?php
-                            $sql = "SELECT IDLSP, tenlsp FROM LOAI_SP";
+                            $sql = "SELECT idlsp, tenlsp FROM loai_sp";
                             $result = SelectAll($sql);
                             if (!empty($result)) {
                                 foreach ($result as $item) {
-                                    $selected = (!empty($idloai) && $idloai == $item['IDLSP']) ? "selected" : "";
+                                    $selected = (!empty($idloai) && $idloai == $item['idlsp']) ? "selected" : "";
                                     echo "<option value='{$item['IDLSP']}' $selected>{$item['tenlsp']}</option>";
                                 }
                             }

@@ -61,9 +61,9 @@
 	?>
 
 
-  <div class="container  bg_img rounded-3" style="max-width:98.5%; height: 48vh;">
-  <div class="row justify-content-md-center" >
-    <div class="col-4" >
+  <div class="container  bg_img rounded-3" style="max-width:98.5%; height: 60vh;">
+  <div class="row justify-content-md-center" style="padding: 20px;" >
+    <div class="col-4"  >
       <div class="bg-wrap h">
   <h2>Stacked form</h2> 
   <form action="" method="post">
@@ -88,7 +88,7 @@
         <input class="form-check-input" type="checkbox" name="remember"> Remember me
       </label>
     </div>
-    <button  type="submit" class="btn btn-primary " name="dangky">Submit</button>
+    <button  type="submit" class="btn btn-primary " style="margin-bottom:10px" name="dangky">Submit</button>
   </form>
 </div>
 </div>
@@ -104,7 +104,7 @@
   border-radius: 10px;
   backdrop-filter: blur(5px); /* làm mờ background phía sau */
   -webkit-backdrop-filter: blur(5px); /* hỗ trợ Safari */
- height: 48vh;
+   height:45vh
   width: 100%;
   margin: auto;
 }

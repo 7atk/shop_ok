@@ -16,7 +16,7 @@ if (isset($_POST['add_to_cart'])) {
     }
 
     // Truy vấn sản phẩm bằng prepared statement
-    $stmt = $conn->prepare("SELECT * FROM SANPHAM WHERE masp = ?");
+    $stmt = $conn->prepare("SELECT * FROM sanpham WHERE masp = ?");
     $stmt->execute([$id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
